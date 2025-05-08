@@ -1,0 +1,513 @@
+/* 后台管理系统样式 */
+:root {
+    --primary-color: #003a8c;
+    --secondary-color: #f5a623;
+    --dark-blue: #002c6b;
+    --light-blue: #e6f7ff;
+    --success-color: #52c41a;
+    --warning-color: #faad14;
+    --error-color: #f5222d;
+    --text-color: #333;
+    --text-light: #666;
+    --border-color: #eee;
+    --bg-light: #f8f8f8;
+    --white: #fff;
+    --sidebar-width: 250px;
+    --header-height: 60px;
+    --shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* 基础样式 */
+.admin-body {
+    font-family: 'Microsoft YaHei', Arial, sans-serif;
+    background-color: var(--bg-light);
+    margin: 0;
+    padding: 0;
+    color: var(--text-color);
+}
+
+/* 登录页面样式 */
+.admin-login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, var(--primary-color), var(--dark-blue));
+}
+
+.admin-login-box {
+    background-color: var(--white);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    width: 400px;
+    padding: 2rem;
+}
+
+.admin-logo {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.admin-logo h1 {
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+    font-size: 1.8rem;
+}
+
+.admin-logo p {
+    color: var(--text-light);
+    font-size: 1rem;
+}
+
+.admin-login-form .form-group {
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.admin-login-form label {
+    position: absolute;
+    left: 1rem;
+    top: 0.75rem;
+    color: var(--text-light);
+}
+
+.admin-login-form input[type="text"],
+.admin-login-form input[type="password"] {
+    width: 100%;
+    padding: 0.75rem 0.75rem 0.75rem 2.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.admin-login-form input:focus {
+    border-color: var(--primary-color);
+    outline: none;
+}
+
+.admin-login-btn {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: var(--primary-color);
+    color: var(--white);
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.admin-login-btn:hover {
+    background-color: var(--dark-blue);
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+}
+
+.remember-me input {
+    margin-right: 0.5rem;
+}
+
+.form-group:last-child {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.forgot-password {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.admin-login-footer {
+    text-align: center;
+    margin-top: 2rem;
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+/* 后台主界面样式 */
+.admin-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* 侧边栏样式 */
+.admin-sidebar {
+    width: var(--sidebar-width);
+    background-color: var(--primary-color);
+    color: var(--white);
+    display: flex;
+    flex-direction: column;
+    transition: width 0.3s;
+}
+
+.admin-sidebar.collapsed {
+    width: 60px;
+}
+
+.admin-sidebar-header {
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.admin-sidebar-header h2 {
+    margin: 0;
+    font-size: 1.2rem;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.sidebar-toggle {
+    background: none;
+    border: none;
+    color: var(--white);
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
+.admin-nav {
+    flex: 1;
+    padding: 1rem 0;
+    overflow-y: auto;
+}
+
+.admin-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.admin-nav li {
+    margin-bottom: 0.25rem;
+}
+
+.admin-nav a {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    transition: background-color 0.3s;
+    white-space: nowrap;
+}
+
+.admin-nav a i {
+    margin-right: 0.75rem;
+    width: 20px;
+    text-align: center;
+}
+
+.admin-nav li.active a,
+.admin-nav a:hover {
+    background-color: rgba(255,255,255,0.1);
+    color: var(--white);
+}
+
+.admin-sidebar-footer {
+    padding: 1rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.admin-sidebar-footer a {
+    display: block;
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    padding: 0.5rem 0;
+    transition: color 0.3s;
+}
+
+.admin-sidebar-footer a i {
+    margin-right: 0.5rem;
+}
+
+.admin-sidebar-footer a:hover {
+    color: var(--white);
+}
+
+/* 主内容区域样式 */
+.admin-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.admin-header {
+    height: var(--header-height);
+    background-color: var(--white);
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1.5rem;
+    box-shadow: var(--shadow);
+}
+
+.admin-header-title h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: var(--primary-color);
+}
+
+.admin-header-user {
+    display: flex;
+    align-items: center;
+}
+
+.admin-user-greeting {
+    margin-right: 1rem;
+    color: var(--text-light);
+}
+
+.admin-user-avatar {
+    position: relative;
+    cursor: pointer;
+}
+
+.admin-user-avatar img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.admin-user-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: var(--white);
+    border-radius: 4px;
+    box-shadow: var(--shadow);
+    width: 180px;
+    display: none;
+    z-index: 100;
+}
+
+.admin-user-avatar:hover .admin-user-dropdown {
+    display: block;
+}
+
+.admin-user-dropdown a {
+    display: block;
+    padding: 0.75rem 1rem;
+    color: var(--text-color);
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.admin-user-dropdown a:hover {
+    background-color: var(--bg-light);
+}
+
+.admin-user-dropdown a i {
+    margin-right: 0.5rem;
+    width: 16px;
+    text-align: center;
+}
+
+/* 内容区域样式 */
+.admin-content {
+    flex: 1;
+    padding: 1.5rem;
+    overflow-y: auto;
+}
+
+/* 统计卡片样式 */
+.admin-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.stat-card {
+    background-color: var(--white);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.stat-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: var(--light-blue);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 1rem;
+}
+
+.stat-icon i {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+}
+
+.stat-info h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1rem;
+    color: var(--text-light);
+}
+
+.stat-number {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin: 0;
+}
+
+/* 最近内容区域样式 */
+.admin-recent {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+.admin-recent-news,
+.admin-recent-articles {
+    background-color: var(--white);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    padding: 1.5rem;
+}
+
+.admin-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.admin-section-header h2 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: var(--primary-color);
+}
+
+.admin-view-all {
+    color: var(--text-light);
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+/* 表格样式 */
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.admin-table th,
+.admin-table td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.admin-table th {
+    font-weight: 600;
+    color: var(--text-light);
+}
+
+.admin-table tr:last-child td {
+    border-bottom: none;
+}
+
+.status {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+}
+
+.status.published {
+    background-color: rgba(82, 196, 26, 0.1);
+    color: var(--success-color);
+}
+
+.status.draft {
+    background-color: rgba(250, 173, 20, 0.1);
+    color: var(--warning-color);
+}
+
+.action-btn {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    border-radius: 4px;
+    margin-right: 0.5rem;
+    color: var(--text-light);
+    transition: all 0.3s;
+}
+
+.edit-btn:hover {
+    background-color: var(--light-blue);
+    color: var(--primary-color);
+}
+
+.delete-btn:hover {
+    background-color: rgba(245, 34, 45, 0.1);
+    color: var(--error-color);
+}
+
+/* 响应式设计 */
+@media screen and (max-width: 1024px) {
+    .admin-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .admin-recent {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .admin-sidebar {
+        position: fixed;
+        left: -250px;
+        top: 0;
+        bottom: 0;
+        z-index: 1000;
+        transition: left 0.3s;
+    }
+    
+    .admin-sidebar.active {
+        left: 0;
+    }
+    
+    .admin-main {
+        margin-left: 0;
+    }
+    
+    .mobile-nav-toggle {
+        display: block;
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        z-index: 1001;
+        background-color: var(--primary-color);
+        color: var(--white);
+        border: none;
+        width: 40px;
+        height: 40px;
+        border-radius: 4px;
+        font-size: 1.2rem;
+        cursor: pointer;
+    }
+    
+    .admin-header {
+        padding-left: 60px;
+    }
+}
