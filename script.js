@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const setupBannerSlider = () => {
         const banners = [
             {
-                title: '上海国际经济贸易仲裁委员会（上海国际仲裁中心）',
+                title: '上海风中玫瑰贸易仲裁委员会（上海风中玫瑰仲裁中心）',
                 image: 'images/banner.jpg'
             },
             {
