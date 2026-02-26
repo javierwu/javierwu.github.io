@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>筹备时间轴 - 浙工大给排水2006届 毕业20周年同学会</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* 时间轴专用样式 */
+        .timeline-hero {
+            background: linear-gradient(135deg, var(--campus-green) 0%, var(--water-blue) 100%);
+            padding: 80px 30px 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .timeline-hero::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 30px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 60'%3E%3Cpath d='M0 30 Q300 0, 600 30 T1200 30 V60 H0 Z' fill='rgba(255,255,255,0.15)'/%3E%3C/svg%3E") repeat-x;
+            background-size: 600px 30px;
+        }
+
+        .timeline-hero h1 {
+            font-size: 42px;
+            color: var(--pure-white);
+            margin-bottom: 15px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 1;
+        }
+
+        .timeline-hero p {
+            font-size: 18px;
+            color: rgba(255,255,255,0.95);
+            position: relative;
+            z-index: 1;
+        }
+
+        .timeline-overview {
+            background: var(--pure-white);
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .overview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .overview-card {
+            background: linear-gradient(135deg, var(--cream-white) 0%, var(--pure-white) 100%);
+            padding: 30px;
+            border-radius: 20px;
+            border: 2px solid var(--water-light);
+            box-shadow: 0 4px 15px rgba(135, 169, 107, 0.1);
+        }
+
+        .overview-card .date {
+            font-size: 14px;
+            color: var(--campus-green);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .overview-card h3 {
+            font-size: 20px;
+            color: var(--dark-gray);
+            margin-bottom: 15px;
+        }
+
+        .overview-card .duration {
+            display: inline-block;
+            background: var(--water-light);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            color: var(--campus-green-dark);
+        }
+
+        /* 时间轴主线 */
+        .timeline-section {
+            padding: 60px 30px;
+            background: var(--cream-white);
+        }
+
+        .timeline-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        /* 时间轴中心线 */
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg,
+                var(--campus-green) 0%,
+                var(--water-blue) 50%,
+                var(--nostalgic-gold) 100%);
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 60px;
+            display: flex;
+            align-items: center;
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        /* 时间轴节点 */
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            width: 24px;
+            height: 24px;
+            background: var(--campus-green);
+            border: 4px solid var(--pure-white);
+            border-radius: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            box-shadow: 0 0 0 4px rgba(135, 169, 107, 0.2);
+        }
+
+        .timeline-item.alt .timeline-dot {
+            background: var(--water-blue);
+        }
+
+        .timeline-item:nth-child(3n) .timeline-dot {
+            background: var(--nostalgic-gold);
+        }
+
+        /* 时间轴内容卡片 */
+        .timeline-content {
+            width: 45%;
+            padding: 30px;
+            background: var(--pure-white);
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            position: relative;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-right: auto;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-left: auto;
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-style: solid;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content::before {
+            right: -10px;
+            top: 30px;
+            border-width: 10px 0 10px 10px;
+            border-color: transparent transparent transparent var(--pure-white);
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::before {
+            left: -10px;
+            top: 30px;
+            border-width: 10px 10px 10px 0;
+            border-color: transparent var(--pure-white) transparent transparent;
+        }
+
+        .timeline-stage {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--campus-green), var(--campus-green-dark));
+            color: var(--pure-white);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .timeline-item:nth-child(3n) .timeline-stage {
+            background: linear-gradient(135deg, var(--nostalgic-gold), #c49564);
+        }
+
+        .timeline-content h3 {
+            font-size: 20px;
+            color: var(--dark-gray);
+            margin-bottom: 15px;
+        }
+
+        .timeline-content .date-range {
+            font-size: 14px;
+            color: var(--campus-green);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .timeline-content ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .timeline-content li {
+            padding: 8px 0;
+            padding-left: 24px;
+            position: relative;
+            font-size: 14px;
+            color: var(--dark-gray);
+        }
+
+        .timeline-content li::before {
+            content: '•';
+            position: absolute;
+            left: 8px;
+            color: var(--campus-green);
+            font-size: 18px;
+        }
+
+        .timeline-item:nth-child(3n) .timeline-content li::before {
+            color: var(--nostalgic-gold);
+        }
+
+        /* 关键日期高亮 */
+        .key-dates {
+            background: var(--pure-white);
+            padding: 60px 30px;
+        }
+
+        .key-dates h2 {
+            text-align: center;
+            font-size: 32px;
+            color: var(--dark-gray);
+            margin-bottom: 40px;
+        }
+
+        .key-dates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .key-date-card {
+            background: linear-gradient(135deg, var(--cream-white), var(--pure-white));
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            border: 2px solid var(--water-light);
+            transition: all 0.3s;
+        }
+
+        .key-date-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(135, 169, 107, 0.2);
+            border-color: var(--campus-green);
+        }
+
+        .key-date-card.highlight {
+            background: linear-gradient(135deg, var(--campus-green), var(--campus-green-dark));
+            border-color: var(--campus-green);
+        }
+
+        .key-date-card.highlight .date,
+        .key-date-card.highlight .event {
+            color: var(--pure-white);
+        }
+
+        .key-date-card .date {
+            font-size: 13px;
+            color: var(--campus-green);
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .key-date-card .event {
+            font-size: 16px;
+            color: var(--dark-gray);
+            font-weight: 600;
+        }
+
+        /* 返回按钮 */
+        .back-section {
+            text-align: center;
+            padding: 40px 30px 60px;
+            background: var(--cream-white);
+        }
+
+        .back-btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, var(--campus-green), var(--campus-green-dark));
+            color: var(--pure-white);
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(135, 169, 107, 0.3);
+            transition: all 0.3s;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(135, 169, 107, 0.4);
+        }
+
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .timeline-container::before {
+                left: 30px;
+            }
+
+            .timeline-dot {
+                left: 30px;
+            }
+
+            .timeline-content {
+                width: calc(100% - 70px);
+                margin-left: 70px !important;
+            }
+
+            .timeline-content::before {
+                left: -10px !important;
+                right: auto !important;
+                border-width: 10px 10px 10px 0 !important;
+                border-color: transparent var(--pure-white) transparent transparent !important;
+            }
+
+            .timeline-hero h1 {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-number">20</span>
+                <span class="logo-years">06-26</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="timeline.html" class="active">时间轴</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 头部 -->
+    <section class="timeline-hero">
+        <h1>📅 筹备时间轴</h1>
+        <p>浙工大给排水2006届 毕业20周年同学会</p>
+    </section>
+
+    <!-- 概览 -->
+    <section class="timeline-overview">
+        <div class="overview-grid">
+            <div class="overview-card">
+                <div class="date">📋 第一阶段</div>
+                <h3>方案确定</h3>
+                <p>2月27日 - 3月18日</p>
+                <span class="duration">20天</span>
+            </div>
+            <div class="overview-card">
+                <div class="date">🏨 第二阶段</div>
+                <h3>场地询价</h3>
+                <p>3月19日 - 3月29日</p>
+                <span class="duration">10天</span>
+            </div>
+            <div class="overview-card">
+                <div class="date">👨‍🏫 第三阶段</div>
+                <h3>老师邀请</h3>
+                <p>3月19日 - 4月5日</p>
+                <span class="duration">15天</span>
+            </div>
+            <div class="overview-card">
+                <div class="date">✉️ 第四阶段</div>
+                <h3>邀请函报名</h3>
+                <p>4月3日 - 4月20日</p>
+                <span class="duration">18天</span>
+            </div>
+            <div class="overview-card">
+                <div class="date">💰 第五阶段</div>
+                <h3>收费预订</h3>
+                <p>4月21日 - 5月5日</p>
+                <span class="duration">15天</span>
+            </div>
+            <div class="overview-card">
+                <div class="date">🎨 第六阶段</div>
+                <h3>物料准备</h3>
+                <p>4月15日 - 5月20日</p>
+                <span class="duration">并行</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- 时间轴 -->
+    <section class="timeline-section">
+        <div class="timeline-container">
+            <!-- 第一阶段 -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="timeline-stage">第一阶段</span>
+                    <div class="date-range">2月27日 - 3月18日（20天）</div>
+                    <h3>方案确定</h3>
+                    <ul>
+                        <li>📢 2月27日 发布调查问卷</li>
+                        <li>📞 3月2日 第一轮1对1跟进完成</li>
+                        <li>📊 3月8日 中期统计，发布提醒</li>
+                        <li>📞 3月12日 第二轮1对1跟进完成</li>
+                        <li>⏰ 3月15日 <strong>问卷截止 24:00</strong></li>
+                        <li>📈 3月15日 统计投票结果</li>
+                        <li>🏆 3月16日 筹备组会议讨论方案</li>
+                        <li>🏆 3月18日 <strong>确定最终方案</strong></li>
+                        <li>📢 3月18日 公布投票结果</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 第二阶段 -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="timeline-stage">第二阶段</span>
+                    <div class="date-range">3月19日 - 3月29日（10天）</div>
+                    <h3>场地询价</h3>
+                    <ul>
+                        <li>🏨 3月19-25日 场地询价（杭州/千岛湖/大巴）</li>
+                        <li>🏭 3月25日 农夫山泉参观预约</li>
+                        <li>📋 3月27日 制作报价对比表</li>
+                        <li>💰 3月27日 细化预算</li>
+                        <li>🏨 3月29日 预订意向场地</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 第三阶段 -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="timeline-stage">第三阶段</span>
+                    <div class="date-range">3月19日 - 4月5日（15天）</div>
+                    <h3>老师邀请</h3>
+                    <ul>
+                        <li>📋 3月19日 整理老师名单</li>
+                        <li>📞 3月19日-4月2日 联系邀请老师</li>
+                        <li>✅ 4月5日 确认参会名单</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 第四阶段 -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="timeline-stage">第四阶段</span>
+                    <div class="date-range">4月3日 - 4月20日（18天）</div>
+                    <h3>邀请函与报名</h3>
+                    <ul>
+                        <li>📝 4月3日 设计邀请函、制作表单</li>
+                        <li>📢 4月6日 发布正式邀请函</li>
+                        <li>📊 4月15日 收集报名信息</li>
+                        <li>📞 4月18日 跟进未报名</li>
+                        <li>📈 4月20日 统计最终人数</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 第五阶段 -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="timeline-stage">第五阶段</span>
+                    <div class="date-range">4月21日 - 5月5日（15天）</div>
+                    <h3>收费与预订</h3>
+                    <ul>
+                        <li>💰 4月21日 确定收费金额</li>
+                        <li>💳 4月28日 <strong>收取费用</strong></li>
+                        <li>📋 4月28日 建立收费台账</li>
+                        <li>🏨 4月29日 确认房间数量</li>
+                        <li>🏨 5月2日 起草场地协议</li>
+                        <li>🏨 5月5日 <strong>签订协议、付定金</strong></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 第六阶段 -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="timeline-stage">第六阶段</span>
+                    <div class="date-range">4月15日 - 5月20日（并行）</div>
+                    <h3>物料准备</h3>
+                    <ul>
+                        <li>🎨 4月15日 设计横幅/胸牌</li>
+                        <li>🎁 4月20日 确定纪念品方案</li>
+                        <li>📋 4月25日 确认场地布置要求</li>
+                        <li>📷 4月30日 收集老照片</li>
+                        <li>☁️ 5月5日 整理云相册</li>
+                        <li>🍽️ 5月10日 确认餐饮安排</li>
+                        <li>🎬 5月15日 制作老照片视频</li>
+                        <li>🖨️ 5月20日 <strong>制作活动物料</strong></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 第七阶段 -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="timeline-stage">第七阶段</span>
+                    <div class="date-range">活动日</div>
+                    <h3>活动执行</h3>
+                    <ul>
+                        <li>✅ 活动前3天 最终确认名单</li>
+                        <li>🛡️ 活动前3天 购买活动保险</li>
+                        <li>📢 活动前1天 发布温馨提示</li>
+                        <li>🏨 活动前1天 确认活动安排</li>
+                        <li>📋 活动前1天 总协调会</li>
+                        <li>📋 <strong>活动日 活动执行总控</strong></li>
+                        <li>📸 活动日 活动摄影记录</li>
+                        <li>🚌 活动日 交通调度（如需）</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 第八阶段 -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="timeline-stage">第八阶段</span>
+                    <div class="date-range">活动后30天内</div>
+                    <h3>收尾工作</h3>
+                    <ul>
+                        <li>📊 活动后3天 费用决算</li>
+                        <li>💰 活动后7天 费用公示</li>
+                        <li>📷 活动后7天 整理活动照片</li>
+                        <li>📝 活动后10天 撰写活动回顾</li>
+                        <li>🤝 活动后30天 确定下次联络人</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 关键日期 -->
+    <section class="key-dates">
+        <h2>🔑 关键日期一览</h2>
+        <div class="key-dates-grid">
+            <div class="key-date-card highlight">
+                <div class="date">3月15日</div>
+                <div class="event">🔴 问卷截止</div>
+            </div>
+            <div class="key-date-card highlight">
+                <div class="date">3月18日</div>
+                <div class="event">🔴 确定方案</div>
+            </div>
+            <div class="key-date-card">
+                <div class="date">4月6日</div>
+                <div class="event">发布邀请函</div>
+            </div>
+            <div class="key-date-card">
+                <div class="date">4月20日</div>
+                <div class="event">统计人数</div>
+            </div>
+            <div class="key-date-card highlight">
+                <div class="date">4月28日</div>
+                <div class="event">🔴 收费截止</div>
+            </div>
+            <div class="key-date-card">
+                <div class="date">5月5日</div>
+                <div class="event">场地签约</div>
+            </div>
+            <div class="key-date-card">
+                <div class="date">5月20日</div>
+                <div class="event">物料完成</div>
+            </div>
+            <div class="key-date-card highlight">
+                <div class="date">待定</div>
+                <div class="event">🔴 活动日</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 返回按钮 -->
+    <section class="back-section">
+        <a href="index.html" class="back-btn">← 返回首页</a>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-logo">
+                <span class="logo-number">20</span>
+                <span class="logo-years">06-26</span>
+            </div>
+            <p class="footer-text">浙工大给排水2006届 毕业20周年同学会</p>
+            <p class="footer-tagline">廿载同窗 · 水长流远</p>
+            <p class="footer-copy">© 2026 同学会筹备组</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
