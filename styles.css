@@ -1050,6 +1050,49 @@ section::after {
     transition: width 0.5s ease;
 }
 
+/* 费用明细卡片 */
+.budget-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.detail-card {
+    background: white;
+    border-radius: 15px;
+    padding: 25px 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 5px 20px rgba(135, 169, 107, 0.1);
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.detail-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(135, 169, 107, 0.2);
+    border-color: #87A96B;
+}
+
+.detail-icon {
+    font-size: 40px;
+    flex-shrink: 0;
+}
+
+.detail-content h4 {
+    color: #2C5530;
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+.detail-content span {
+    color: #888;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
 /* 家属政策 */
 .family-policy {
     background: white;
@@ -1113,6 +1156,10 @@ section::after {
         width: 200px;
         height: 200px;
         margin: 0 auto;
+    }
+
+    .budget-details {
+        grid-template-columns: 1fr;
     }
 
     .policy-grid {
