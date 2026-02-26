@@ -189,41 +189,143 @@
             <h2 class="section-title">💰 预算说明</h2>
             <p class="section-subtitle">费用构成与家属政策</p>
 
-            <div class="budget-grid">
-                <div class="budget-card">
-                    <div class="budget-icon">🏨</div>
-                    <h3>住宿费用</h3>
-                    <p>约占35-40%</p>
-                    <p class="budget-desc">舒适型酒店，按2人/间分摊</p>
+            <!-- 总金额显示 -->
+            <div class="budget-total">
+                <div class="total-amount">
+                    <span class="total-label">预估总费用</span>
+                    <span class="total-value">1200-1800<span class="total-unit">元/人</span></span>
                 </div>
-                <div class="budget-card">
-                    <div class="budget-icon">🍽️</div>
-                    <h3>餐饮费用</h3>
-                    <p>约占30-35%</p>
-                    <p class="budget-desc">含2正餐1晚宴，特色餐饮</p>
+                <p class="total-note">* 最终费用按实际核算，多退少补</p>
+            </div>
+
+            <!-- 费用构成图表 -->
+            <div class="budget-chart-container">
+                <div class="chart-left">
+                    <!-- 饼图 -->
+                    <div class="pie-chart">
+                        <svg viewBox="0 0 200 200" class="pie-svg">
+                            <circle cx="100" cy="100" r="80" fill="none" stroke="#e8f0e8" stroke-width="40"/>
+                            <circle cx="100" cy="100" r="80" fill="none" stroke="#87A96B" stroke-width="40"
+                                    stroke-dasharray="125.6 377" stroke-dashoffset="0" class="pie-segment"/>
+                            <circle cx="100" cy="100" r="80" fill="none" stroke="#D4A574" stroke-width="40"
+                                    stroke-dasharray="109.9 377" stroke-dashoffset="-125.6" class="pie-segment"/>
+                            <circle cx="100" cy="100" r="80" fill="none" stroke="#A8C69F" stroke-width="40"
+                                    stroke-dasharray="47.1 377" stroke-dashoffset="-235.5" class="pie-segment"/>
+                            <circle cx="100" cy="100" r="80" fill="none" stroke="#E8D4C4" stroke-width="40"
+                                    stroke-dasharray="37.7 377" stroke-dashoffset="-282.6" class="pie-segment"/>
+                        </svg>
+                        <div class="pie-center">
+                            <span class="pie-label">费用构成</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="budget-card">
-                    <div class="budget-icon">🚌</div>
-                    <h3>交通费用</h3>
-                    <p>约占10-15%</p>
-                    <p class="budget-desc">市内交通或大巴包车</p>
-                </div>
-                <div class="budget-card">
-                    <div class="budget-icon">🎁</div>
-                    <h3>物料费用</h3>
-                    <p>约占8-12%</p>
-                    <p class="budget-desc">纪念品、胸牌、宣传物料</p>
+                <div class="chart-right">
+                    <div class="legend-list">
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #87A96B;"></div>
+                            <div class="legend-info">
+                                <span class="legend-name">住宿费用</span>
+                                <span class="legend-percent">35-40%</span>
+                            </div>
+                            <div class="legend-bar"><div class="legend-fill" style="width: 38%; background: #87A96B;"></div></div>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #D4A574;"></div>
+                            <div class="legend-info">
+                                <span class="legend-name">餐饮费用</span>
+                                <span class="legend-percent">30-35%</span>
+                            </div>
+                            <div class="legend-bar"><div class="legend-fill" style="width: 33%; background: #D4A574;"></div></div>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #A8C69F;"></div>
+                            <div class="legend-info">
+                                <span class="legend-name">交通费用</span>
+                                <span class="legend-percent">10-15%</span>
+                            </div>
+                            <div class="legend-bar"><div class="legend-fill" style="width: 13%; background: #A8C69F;"></div></div>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #E8D4C4;"></div>
+                            <div class="legend-info">
+                                <span class="legend-name">物料费用</span>
+                                <span class="legend-percent">8-12%</span>
+                            </div>
+                            <div class="legend-bar"><div class="legend-fill" style="width: 10%; background: #E8D4C4;"></div></div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
+            <!-- 费用明细卡片 -->
+            <div class="budget-details">
+                <div class="detail-card">
+                    <div class="detail-icon">🏨</div>
+                    <div class="detail-content">
+                        <h4>住宿费用</h4>
+                        <p>420-720元/人</p>
+                        <span>舒适型酒店，2人/间分摊</span>
+                    </div>
+                </div>
+                <div class="detail-card">
+                    <div class="detail-icon">🍽️</div>
+                    <div class="detail-content">
+                        <h4>餐饮费用</h4>
+                        <p>360-630元/人</p>
+                        <span>含2正餐1晚宴</span>
+                    </div>
+                </div>
+                <div class="detail-card">
+                    <div class="detail-icon">🚌</div>
+                    <div class="detail-content">
+                        <h4>交通费用</h4>
+                        <p>120-270元/人</p>
+                        <span>市内交通或大巴包车</span>
+                    </div>
+                </div>
+                <div class="detail-card">
+                    <div class="detail-icon">🎁</div>
+                    <div class="detail-content">
+                        <h4>物料费用</h4>
+                        <p>100-180元/人</p>
+                        <span>纪念品、胸牌、宣传物料</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 家属政策 -->
             <div class="family-policy">
                 <h3>👨‍👩‍👧‍👦 家属政策</h3>
-                <ul class="policy-list">
-                    <li><strong>配偶：</strong>按同等标准收费</li>
-                    <li><strong>非成年子女（18岁以下）：</strong>免费参加</li>
-                    <li><strong>结算原则：</strong>按实际核算，多退少补</li>
-                    <li><strong>费用公示：</strong>活动后7天内公示明细</li>
-                </ul>
+                <div class="policy-grid">
+                    <div class="policy-item">
+                        <div class="policy-icon">💑</div>
+                        <div class="policy-text">
+                            <strong>配偶</strong>
+                            <p>按同等标准收费</p>
+                        </div>
+                    </div>
+                    <div class="policy-item">
+                        <div class="policy-icon">👶</div>
+                        <div class="policy-text">
+                            <strong>非成年子女（18岁以下）</strong>
+                            <p>免费参加</p>
+                        </div>
+                    </div>
+                    <div class="policy-item">
+                        <div class="policy-icon">📊</div>
+                        <div class="policy-text">
+                            <strong>结算原则</strong>
+                            <p>按实际核算，多退少补</p>
+                        </div>
+                    </div>
+                    <div class="policy-item">
+                        <div class="policy-icon">📋</div>
+                        <div class="policy-text">
+                            <strong>费用公示</strong>
+                            <p>活动后7天内</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
