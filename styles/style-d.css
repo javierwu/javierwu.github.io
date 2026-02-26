@@ -1,0 +1,590 @@
+/* ========================================
+   风格D：清新水韵
+   ======================================== */
+
+/* 颜色变量 */
+:root {
+    --campus-green: #87A96B;
+    --campus-green-dark: #6B8E5A;
+    --nostalgic-gold: #D4A574;
+    --terracotta-red: #E07A5F;
+    --cream-white: #F4F1DE;
+    --dark-gray: #2C2C2C;
+    --light-gray: #CCCCCC;
+    --pure-white: #FFFFFF;
+    --water-blue: #A8D5E2;
+    --water-light: #D4F1F4;
+}
+
+/* 全局样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    line-height: 1.7;
+    color: var(--dark-gray);
+    background: linear-gradient(180deg, var(--water-light) 0%, var(--pure-white) 50%, var(--cream-white) 100%);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 30px;
+}
+
+/* 导航栏 - 水韵风格 */
+.navbar {
+    background: linear-gradient(135deg, var(--campus-green) 0%, var(--water-blue) 100%);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 20px rgba(135, 169, 107, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.navbar::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 30px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 60'%3E%3Cpath d='M0 30 Q300 0, 600 30 T1200 30 V60 H0 Z' fill='rgba(255,255,255,0.15)'/%3E%3C/svg%3E") repeat-x;
+    background-size: 600px 30px;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 30px 35px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-number {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--pure-white);
+    font-family: 'Arial Rounded MT Bold', 'Arial', sans-serif;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    position: relative;
+}
+
+.logo-number::after {
+    content: '💧';
+    position: absolute;
+    font-size: 14px;
+    top: -5px;
+    right: -8px;
+    opacity: 0.8;
+}
+
+.logo-years {
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.9);
+    letter-spacing: 3px;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 35px;
+}
+
+.nav-menu a {
+    color: rgba(255, 255, 255, 0.95);
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    position: relative;
+    padding: 8px 16px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 20px;
+    transition: all 0.3s;
+    backdrop-filter: blur(5px);
+}
+
+.nav-menu a:hover {
+    background: rgba(255,255,255,0.25);
+    transform: translateY(-2px);
+}
+
+/* 主横幅 - 水韵风格 */
+.hero {
+    background: linear-gradient(180deg,
+        var(--campus-green) 0%,
+        var(--water-blue) 50%,
+        var(--water-light) 100%
+    );
+    padding: 100px 30px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 80'%3E%3Cpath d='M0 40 Q300 10, 600 40 T1200 40 V80 H0 Z' fill='rgba(255,255,255,0.2)'/%3E%3Cpath d='M0 60 Q300 30, 600 60 T1200 60 V80 H0 Z' fill='rgba(255,255,255,0.15)'/%3E%3C/svg%3E") no-repeat bottom;
+    background-size: 100% 80px;
+}
+
+.hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+.hero-badge {
+    width: 110px;
+    height: 110px;
+    margin: 0 auto 30px;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(10px);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--pure-white);
+    font-family: 'Arial', sans-serif;
+    box-shadow:
+        0 8px 32px rgba(0,0,0,0.15),
+        inset 0 2px 4px rgba(255,255,255,0.3);
+    border: 3px solid rgba(255, 255, 255, 0.4);
+    position: relative;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.hero-badge::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: -8px;
+    right: -8px;
+    bottom: -8px;
+    border: 2px dashed rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    animation: spin 20s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.hero-title {
+    font-size: 42px;
+    font-weight: 700;
+    color: var(--pure-white);
+    margin-bottom: 15px;
+    text-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+.hero-subtitle {
+    font-size: 26px;
+    font-weight: 600;
+    color: var(--nostalgic-gold);
+    margin-bottom: 20px;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.15);
+}
+
+.hero-tagline {
+    font-size: 17px;
+    color: rgba(255, 255, 255, 0.95);
+    letter-spacing: 10px;
+    margin-bottom: 35px;
+    font-weight: 500;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.hero-years {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--pure-white);
+    margin-bottom: 40px;
+    font-family: 'Arial', sans-serif;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.15);
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+/* 按钮 - 水韵风格 */
+.btn {
+    padding: 14px 32px;
+    border: none;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--terracotta-red) 0%, #c96a52 100%);
+    color: var(--pure-white);
+    border-radius: 25px;
+    box-shadow: 0 6px 20px rgba(224, 122, 95, 0.4);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(224, 122, 95, 0.5);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(10px);
+    color: var(--pure-white);
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 25px;
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.35);
+    transform: translateY(-3px);
+}
+
+.btn-outline {
+    background: transparent;
+    color: var(--campus-green);
+    border: 2px solid var(--campus-green);
+    border-radius: 25px;
+}
+
+/* Demo Section */
+.demo-section {
+    padding: 80px 0;
+    position: relative;
+}
+
+.demo-section::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 20px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 20'%3E%3Cpath d='M0 10 Q150 0, 300 10 T600 10 T900 10 T1200 10 V20 H0 Z' fill='rgba(135,169,107,0.1)'/%3E%3C/svg%3E") repeat-x;
+}
+
+.section-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--campus-green);
+    text-align: center;
+    margin-bottom: 50px;
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--campus-green), var(--water-blue));
+    border-radius: 2px;
+}
+
+/* 卡片 - 水韵风格 */
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+}
+
+.card {
+    background: var(--pure-white);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(135, 169, 107, 0.15);
+    transition: all 0.3s;
+    position: relative;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--campus-green), var(--water-blue));
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 50px rgba(135, 169, 107, 0.25);
+}
+
+.card-header {
+    padding: 25px;
+    border-bottom: 1px solid rgba(135, 169, 107, 0.1);
+    background: linear-gradient(180deg, rgba(135, 169, 107, 0.05) 0%, transparent 100%);
+}
+
+.card-tag {
+    display: inline-block;
+    padding: 8px 18px;
+    background: linear-gradient(135deg, var(--campus-green) 0%, var(--water-blue) 100%);
+    color: var(--pure-white);
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 15px rgba(135, 169, 107, 0.3);
+}
+
+.card h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--dark-gray);
+}
+
+.card-body {
+    padding: 25px;
+}
+
+.card-price {
+    font-size: 30px;
+    font-weight: 700;
+    color: var(--terracotta-red);
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.card-features {
+    list-style: none;
+}
+
+.card-features li {
+    padding: 10px 0;
+    font-size: 14px;
+    color: var(--dark-gray);
+    position: relative;
+    padding-left: 24px;
+}
+
+.card-features li::before {
+    content: '💧';
+    position: absolute;
+    left: 0;
+    font-size: 12px;
+}
+
+/* 表格 - 水韵风格 */
+.table-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.demo-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: var(--pure-white);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(135, 169, 107, 0.15);
+}
+
+.demo-table th,
+.demo-table td {
+    padding: 18px 22px;
+    text-align: left;
+}
+
+.demo-table th {
+    background: linear-gradient(135deg, var(--campus-green) 0%, var(--water-blue) 100%);
+    color: var(--pure-white);
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.demo-table th:first-child {
+    border-top-left-radius: 20px;
+}
+
+.demo-table th:last-child {
+    border-top-right-radius: 20px;
+}
+
+.demo-table tr {
+    border-bottom: 1px solid rgba(135, 169, 107, 0.1);
+}
+
+.demo-table tr:last-child td {
+    border-bottom: none;
+}
+
+.demo-table tr:last-child td:first-child {
+    border-bottom-left-radius: 20px;
+}
+
+.demo-table tr:last-child td:last-child {
+    border-bottom-right-radius: 20px;
+}
+
+.demo-table td {
+    font-size: 15px;
+}
+
+.demo-table tr:hover td {
+    background: rgba(135, 169, 107, 0.03);
+}
+
+/* 按钮展示区 */
+.buttons-demo {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* 风格说明区 */
+.style-info {
+    background: linear-gradient(180deg,
+        var(--water-light) 0%,
+        var(--campus-green) 100%
+    );
+    padding: 80px 0;
+    position: relative;
+}
+
+.style-info::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 40px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 40'%3E%3Cpath d='M0 20 Q300 0, 600 20 T1200 20 V40 H0 Z' fill='rgba(255,255,255,0.15)'/%3E%3C/svg%3E") repeat-x;
+}
+
+.style-desc-box {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border-radius: 24px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    position: relative;
+}
+
+.style-desc-box::before {
+    content: '💧';
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 40px;
+    filter: drop-shadow(0 4px 10px rgba(0,0,0,0.2));
+}
+
+.style-desc-box h3 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--campus-green);
+    margin-bottom: 15px;
+}
+
+.style-desc-box p {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.style-desc-box ul {
+    list-style: none;
+}
+
+.style-desc-box li {
+    padding: 8px 0;
+    font-size: 14px;
+    color: #888;
+}
+
+/* 响应式 */
+@media (max-width: 768px) {
+    .nav-menu {
+        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .hero-title {
+        font-size: 32px;
+    }
+
+    .hero-subtitle {
+        font-size: 20px;
+    }
+
+    .cards-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
+    }
+}

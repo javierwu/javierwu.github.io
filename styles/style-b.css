@@ -1,0 +1,375 @@
+/* ========================================
+   风格B：现代简约
+   ======================================== */
+
+/* 颜色变量 */
+:root {
+    --campus-green: #87A96B;
+    --campus-green-dark: #6B8E5A;
+    --nostalgic-gold: #D4A574;
+    --terracotta-red: #E07A5F;
+    --cream-white: #F4F1DE;
+    --dark-gray: #2C2C2C;
+    --light-gray: #CCCCCC;
+    --pure-white: #FFFFFF;
+}
+
+/* 全局样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Helvetica Neue', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    line-height: 1.7;
+    color: var(--dark-gray);
+    background-color: #FAFAFA;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 30px;
+}
+
+/* 导航栏 - 现代简约风格 */
+.navbar {
+    background: var(--pure-white);
+    border-bottom: 1px solid #EEEEEE;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 18px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-number {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--campus-green);
+    font-family: 'Arial', sans-serif;
+    letter-spacing: -1px;
+}
+
+.logo-years {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--nostalgic-gold);
+    letter-spacing: 3px;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 40px;
+}
+
+.nav-menu a {
+    color: var(--dark-gray);
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.nav-menu a:hover {
+    color: var(--campus-green);
+}
+
+/* 主横幅 - 现代简约风格 */
+.hero {
+    background: var(--pure-white);
+    padding: 100px 30px;
+    text-align: center;
+    border-bottom: 1px solid #EEEEEE;
+}
+
+.hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.hero-badge {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 30px;
+    background: var(--campus-green);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--pure-white);
+    font-family: 'Arial', sans-serif;
+}
+
+.hero-title {
+    font-size: 42px;
+    font-weight: 700;
+    color: var(--dark-gray);
+    margin-bottom: 15px;
+    letter-spacing: -1px;
+}
+
+.hero-subtitle {
+    font-size: 26px;
+    font-weight: 500;
+    color: var(--campus-green);
+    margin-bottom: 20px;
+}
+
+.hero-tagline {
+    font-size: 17px;
+    color: var(--terracotta-red);
+    letter-spacing: 10px;
+    margin-bottom: 30px;
+    font-weight: 500;
+}
+
+.hero-years {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--nostalgic-gold);
+    margin-bottom: 40px;
+    font-family: 'Arial', sans-serif;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+/* 按钮 - 现代简约风格 */
+.btn {
+    padding: 14px 32px;
+    border: none;
+    border-radius: 4px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-primary {
+    background: var(--campus-green);
+    color: var(--pure-white);
+}
+
+.btn-primary:hover {
+    background: var(--campus-green-dark);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--dark-gray);
+    border: 2px solid #E0E0E0;
+}
+
+.btn-secondary:hover {
+    border-color: var(--campus-green);
+    color: var(--campus-green);
+}
+
+.btn-outline {
+    background: transparent;
+    color: var(--campus-green);
+    border: 2px solid var(--campus-green);
+}
+
+/* Demo Section */
+.demo-section {
+    padding: 80px 0;
+    border-bottom: 1px solid #EEEEEE;
+}
+
+.section-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--dark-gray);
+    text-align: center;
+    margin-bottom: 50px;
+    letter-spacing: -1px;
+}
+
+/* 卡片 - 现代简约风格 */
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 25px;
+}
+
+.card {
+    background: var(--pure-white);
+    border: 1px solid #EEEEEE;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.card-header {
+    padding: 25px;
+    border-bottom: 1px solid #EEEEEE;
+}
+
+.card-tag {
+    display: inline-block;
+    padding: 6px 14px;
+    background: var(--campus-green);
+    color: var(--pure-white);
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 3px;
+    margin-bottom: 15px;
+}
+
+.card h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--dark-gray);
+}
+
+.card-body {
+    padding: 25px;
+}
+
+.card-price {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--terracotta-red);
+    margin-bottom: 20px;
+}
+
+.card-features {
+    list-style: none;
+}
+
+.card-features li {
+    padding: 8px 0;
+    font-size: 14px;
+    color: var(--dark-gray);
+}
+
+/* 表格 - 现代简约风格 */
+.table-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.demo-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--pure-white);
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid #EEEEEE;
+}
+
+.demo-table th,
+.demo-table td {
+    padding: 16px 20px;
+    text-align: left;
+    border-bottom: 1px solid #EEEEEE;
+}
+
+.demo-table th {
+    background: #F8F8F8;
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--dark-gray);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.demo-table tr:last-child td {
+    border-bottom: none;
+}
+
+.demo-table td {
+    font-size: 15px;
+}
+
+/* 按钮展示区 */
+.buttons-demo {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* 风格说明区 */
+.style-info {
+    background: #F8F8F8;
+    padding: 80px 0;
+}
+
+.style-desc-box {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.style-desc-box h3 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--dark-gray);
+    margin-bottom: 15px;
+}
+
+.style-desc-box p {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.style-desc-box ul {
+    list-style: none;
+}
+
+.style-desc-box li {
+    padding: 8px 0;
+    font-size: 14px;
+    color: #888;
+}
+
+/* 响应式 */
+@media (max-width: 768px) {
+    .nav-menu {
+        gap: 20px;
+    }
+
+    .hero-title {
+        font-size: 32px;
+    }
+
+    .hero-subtitle {
+        font-size: 20px;
+    }
+
+    .cards-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
+    }
+}

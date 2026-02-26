@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>网站风格预览 - 浙工大给排水2002级2006届</title>
+    <link id="style-link" rel="stylesheet" href="styles/style-b.css">
+    <style>
+        /* 风格切换器样式 */
+        .style-switcher {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            z-index: 9999;
+        }
+        .style-switcher h4 {
+            margin: 0 0 15px 0;
+            font-size: 14px;
+            color: #2C2C2C;
+        }
+        .style-btn {
+            display: block;
+            width: 100%;
+            padding: 10px 20px;
+            margin-bottom: 10px;
+            border: 2px solid #E0E0E0;
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        .style-btn:hover {
+            border-color: #87A96B;
+            background: #F4F1DE;
+        }
+        .style-btn.active {
+            border-color: #87A96B;
+            background: #87A96B;
+            color: white;
+        }
+        .style-desc {
+            font-size: 12px;
+            color: #999;
+            margin-top: 10px;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <!-- 风格切换器 -->
+    <div class="style-switcher">
+        <h4>🎨 选择风格</h4>
+        <button class="style-btn active" onclick="switchStyle('b')">风格B：现代简约</button>
+        <button class="style-btn" onclick="switchStyle('c')">风格C：雅致复古</button>
+        <button class="style-btn" onclick="switchStyle('d')">风格D：清新水韵</button>
+        <p class="style-desc">点击按钮切换不同风格<br>查看实时效果对比</p>
+    </div>
+
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-number">20</span>
+                <span class="logo-years">02-06</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#">首页</a></li>
+                <li><a href="#">关于</a></li>
+                <li><a href="#">方案</a></li>
+                <li><a href="#">联系</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 主横幅 -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">20°</div>
+            <h1 class="hero-title">浙工大给排水2002级2006届</h1>
+            <h2 class="hero-subtitle">毕业20周年同学会</h2>
+            <p class="hero-tagline">廿载同窗 · 水长流远</p>
+            <div class="hero-years">2002 ——— 2026</div>
+            <div class="hero-buttons">
+                <button class="btn btn-primary">查看方案</button>
+                <button class="btn btn-secondary">参与调查</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 卡片展示区 -->
+    <section class="demo-section">
+        <div class="container">
+            <h2 class="section-title">方案对比</h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-tag">🏫 深度怀旧</span>
+                        <h3>方案A：杭州深度怀旧游</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-price">1200-1500元/人</p>
+                        <ul class="card-features">
+                            <li>✅ 完整的朝晖校区回忆</li>
+                            <li>✅ 20周年主题班会</li>
+                            <li>✅ 西湖/运河周边漫游</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-tag">🏞️ 度假休闲</span>
+                        <h3>方案B：千岛湖度假休闲游</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-price">1300-1800元/人</p>
+                        <ul class="card-features">
+                            <li>✅ 千岛湖湖景酒店</li>
+                            <li>✅ 游艇/骑行活动</li>
+                            <li>✅ 封闭社交，亲子友好</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-tag">🌊 异地聚会</span>
+                        <h3>方案C：宁波异地聚会游</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-price">1200-1500元/人</p>
+                        <ul class="card-features">
+                            <li>✅ 自行前往宁波集合</li>
+                            <li>✅ 团建晚宴活动</li>
+                            <li>✅ 异地聚会，新鲜环境</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 表格展示区 -->
+    <section class="demo-section">
+        <div class="container">
+            <h2 class="section-title">日期选项</h2>
+            <div class="table-wrapper">
+                <table class="demo-table">
+                    <thead>
+                        <tr>
+                            <th>日期</th>
+                            <th>说明</th>
+                            <th>特点</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>5月23-24日</td>
+                            <td>周六日</td>
+                            <td>避开六一</td>
+                        </tr>
+                        <tr>
+                            <td>6月27-28日</td>
+                            <td>周六日</td>
+                            <td>高考后，天气好</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- 按钮展示区 -->
+    <section class="demo-section">
+        <div class="container">
+            <h2 class="section-title">按钮样式</h2>
+            <div class="buttons-demo">
+                <button class="btn btn-primary">主要按钮</button>
+                <button class="btn btn-secondary">次要按钮</button>
+                <button class="btn btn-outline">轮廓按钮</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 风格说明 -->
+    <section class="style-info">
+        <div class="container">
+            <h2 class="section-title">当前风格特点</h2>
+            <div id="style-description" class="style-desc-box">
+                <h3>风格B：现代简约</h3>
+                <p>清爽利落，大量留白，直角卡片，扁平化设计</p>
+                <ul>
+                    <li>小圆角 (4px)</li>
+                    <li>轻阴影效果</li>
+                    <li>简洁线条</li>
+                    <li>充裕间距</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const styleDescriptions = {
+            b: {
+                title: '风格B：现代简约',
+                desc: '清爽利落，大量留白，直角卡片，扁平化设计',
+                features: ['小圆角 (4px)', '轻阴影效果', '简洁线条', '充裕间距']
+            },
+            c: {
+                title: '风格C：雅致复古',
+                desc: '纸质纹理背景，复古双线边框，衬线字体',
+                features: ['直角设计', '双线边框', '纸质纹理', '复古装饰']
+            },
+            d: {
+                title: '风格D：清新水韵',
+                desc: '水波纹元素，流动渐变效果，圆润有机形状',
+                features: ['大圆角 (20px)', '水波纹装饰', '渐变背景', '水滴按钮']
+            }
+        };
+
+        function switchStyle(style) {
+            // 更新CSS链接
+            const styleLink = document.getElementById('style-link');
+            styleLink.href = `styles/style-${style}.css`;
+
+            // 更新按钮状态
+            document.querySelectorAll('.style-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // 更新风格说明
+            const info = styleDescriptions[style];
+            const descBox = document.getElementById('style-description');
+            descBox.innerHTML = `
+                <h3>${info.title}</h3>
+                <p>${info.desc}</p>
+                <ul>
+                    ${info.features.map(f => `<li>${f}</li>`).join('')}
+                </ul>
+            `;
+        }
+    </script>
+</body>
+</html>

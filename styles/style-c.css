@@ -1,0 +1,522 @@
+/* ========================================
+   风格C：雅致复古
+   ======================================== */
+
+/* 颜色变量 */
+:root {
+    --campus-green: #87A96B;
+    --campus-green-dark: #6B8E5A;
+    --nostalgic-gold: #D4A574;
+    --terracotta-red: #E07A5F;
+    --cream-white: #F4F1DE;
+    --dark-gray: #2C2C2C;
+    --light-gray: #CCCCCC;
+    --pure-white: #FFFFFF;
+}
+
+/* 全局样式 */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Serif SC', 'SimSun', 'Songti SC', serif;
+    line-height: 1.8;
+    color: var(--dark-gray);
+    background-color: #F9F4EC;
+    background-image:
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 2px,
+            rgba(212, 165, 116, 0.03) 2px,
+            rgba(212, 165, 116, 0.03) 4px
+        );
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 30px;
+}
+
+/* 导航栏 - 复古风格 */
+.navbar {
+    background: #F9F4EC;
+    border-bottom: 3px double var(--nostalgic-gold);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo-number {
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--nostalgic-gold);
+    font-family: 'Georgia', serif;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+.logo-years {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--campus-green);
+    letter-spacing: 4px;
+    font-family: 'Georgia', serif;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 35px;
+}
+
+.nav-menu a {
+    color: var(--dark-gray);
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 5px;
+}
+
+.nav-menu a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--nostalgic-gold);
+    transition: width 0.3s;
+}
+
+.nav-menu a:hover::after {
+    width: 100%;
+}
+
+/* 主横幅 - 复古风格 */
+.hero {
+    background: #F9F4EC;
+    padding: 100px 30px;
+    text-align: center;
+    border-bottom: 3px double var(--nostalgic-gold);
+    position: relative;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 20px;
+    background: radial-gradient(ellipse at top, var(--nostalgic-gold) 0%, transparent 70%);
+    opacity: 0.3;
+}
+
+.hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.hero-badge {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 30px;
+    background: var(--nostalgic-gold);
+    border-radius: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 52px;
+    font-weight: 700;
+    color: var(--cream-white);
+    font-family: 'Georgia', serif;
+    border: 4px double var(--cream-white);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    position: relative;
+}
+
+.hero-badge::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: -8px;
+    right: -8px;
+    bottom: -8px;
+    border: 2px dashed var(--campus-green);
+    opacity: 0.5;
+}
+
+.hero-title {
+    font-size: 44px;
+    font-weight: 700;
+    color: var(--dark-gray);
+    margin-bottom: 20px;
+    font-family: 'Noto Serif SC', serif;
+    position: relative;
+}
+
+.hero-title::after {
+    content: '❝';
+    position: absolute;
+    left: -30px;
+    opacity: 0.2;
+    font-size: 60px;
+}
+
+.hero-title::before {
+    content: '❞';
+    position: absolute;
+    right: -30px;
+    opacity: 0.2;
+    font-size: 60px;
+}
+
+.hero-subtitle {
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--nostalgic-gold);
+    margin-bottom: 25px;
+    font-family: 'Georgia', serif;
+}
+
+.hero-tagline {
+    font-size: 18px;
+    color: var(--terracotta-red);
+    letter-spacing: 12px;
+    margin-bottom: 35px;
+    font-weight: 600;
+    position: relative;
+}
+
+.hero-tagline::before,
+.hero-tagline::after {
+    content: '◆';
+    color: var(--nostalgic-gold);
+    font-size: 10px;
+    vertical-align: middle;
+    margin: 0 15px;
+}
+
+.hero-years {
+    font-size: 26px;
+    font-weight: 600;
+    color: var(--campus-green);
+    margin-bottom: 40px;
+    font-family: 'Georgia', serif;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+/* 按钮 - 复古风格 */
+.btn {
+    padding: 16px 36px;
+    border: none;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: 'Noto Serif SC', serif;
+    position: relative;
+}
+
+.btn-primary {
+    background: var(--nostalgic-gold);
+    color: var(--cream-white);
+    border: 3px double var(--cream-white);
+}
+
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    right: -4px;
+    bottom: -4px;
+    border: 1px solid var(--dark-gray);
+    z-index: -1;
+}
+
+.btn-primary:hover {
+    transform: translate(2px, 2px);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--dark-gray);
+    border: 3px double var(--nostalgic-gold);
+}
+
+.btn-secondary:hover {
+    background: var(--nostalgic-gold);
+    color: var(--cream-white);
+    border-color: var(--cream-white);
+}
+
+.btn-outline {
+    background: transparent;
+    color: var(--campus-green);
+    border: 3px double var(--campus-green);
+}
+
+/* Demo Section */
+.demo-section {
+    padding: 80px 0;
+    border-bottom: 1px dashed var(--nostalgic-gold);
+}
+
+.section-title {
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--dark-gray);
+    text-align: center;
+    margin-bottom: 50px;
+    font-family: 'Noto Serif SC', serif;
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 3px;
+    background: var(--nostalgic-gold);
+}
+
+/* 卡片 - 复古风格 */
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+}
+
+.card {
+    background: #FFFEF8;
+    border: 3px double var(--nostalgic-gold);
+    overflow: hidden;
+    position: relative;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    right: 8px;
+    bottom: 8px;
+    border: 1px solid rgba(212, 165, 116, 0.3);
+    pointer-events: none;
+}
+
+.card-header {
+    padding: 25px;
+    border-bottom: 1px dashed var(--nostalgic-gold);
+    background: linear-gradient(to bottom, #FFFEF8, #F9F4EC);
+}
+
+.card-tag {
+    display: inline-block;
+    padding: 8px 16px;
+    background: var(--campus-green);
+    color: var(--cream-white);
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    font-family: 'Georgia', serif;
+    border: 2px solid rgba(255,255,255,0.3);
+}
+
+.card h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--dark-gray);
+    font-family: 'Noto Serif SC', serif;
+}
+
+.card-body {
+    padding: 25px;
+}
+
+.card-price {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--terracotta-red);
+    margin-bottom: 20px;
+    font-family: 'Georgia', serif;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+.card-features {
+    list-style: none;
+}
+
+.card-features li {
+    padding: 10px 0;
+    font-size: 15px;
+    color: var(--dark-gray);
+    position: relative;
+    padding-left: 20px;
+}
+
+.card-features li::before {
+    content: '❧';
+    position: absolute;
+    left: 0;
+    color: var(--campus-green);
+}
+
+/* 表格 - 复古风格 */
+.table-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.demo-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #FFFEF8;
+    border: 3px double var(--nostalgic-gold);
+}
+
+.demo-table th,
+.demo-table td {
+    padding: 18px 22px;
+    text-align: left;
+    border-bottom: 1px dashed var(--nostalgic-gold);
+}
+
+.demo-table th {
+    background: #F9F4EC;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--dark-gray);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-family: 'Georgia', serif;
+    border-bottom: 2px solid var(--nostalgic-gold);
+}
+
+.demo-table tr:last-child td {
+    border-bottom: none;
+}
+
+.demo-table td {
+    font-size: 16px;
+}
+
+/* 按钮展示区 */
+.buttons-demo {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* 风格说明区 */
+.style-info {
+    background: linear-gradient(to bottom, #F9F4EC, #FFE8D6);
+    padding: 80px 0;
+    border-top: 3px double var(--nostalgic-gold);
+}
+
+.style-desc-box {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 40px;
+    background: #FFFEF8;
+    border: 3px double var(--nostalgic-gold);
+    position: relative;
+}
+
+.style-desc-box::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    border: 1px dashed var(--nostalgic-gold);
+    pointer-events: none;
+}
+
+.style-desc-box h3 {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--dark-gray);
+    margin-bottom: 15px;
+    font-family: 'Noto Serif SC', serif;
+}
+
+.style-desc-box p {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.style-desc-box ul {
+    list-style: none;
+}
+
+.style-desc-box li {
+    padding: 8px 0;
+    font-size: 14px;
+    color: #888;
+}
+
+/* 响应式 */
+@media (max-width: 768px) {
+    .nav-menu {
+        gap: 20px;
+    }
+
+    .hero-title {
+        font-size: 32px;
+    }
+
+    .hero-subtitle {
+        font-size: 22px;
+    }
+
+    .cards-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
+    }
+}
