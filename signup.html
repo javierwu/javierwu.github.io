@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>报名状态 - 浙工大给排水2006届 毕业20周年同学会</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="signup-styles.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-number">20</span>
+                <span class="logo-years">06-26</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="#about">关于</a></li>
+                <li><a href="index.html#options">方案</a></li>
+                <li><a href="timeline.html">时间轴</a></li>
+                <li><a href="signup.html" class="active">报名状态</a></li>
+                <li><a href="index.html#survey">调查</a></li>
+                <li><a href="index.html#contact">联系</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 主内容 -->
+    <section class="signup-page">
+        <div class="container">
+            <h1 class="page-title">报名状态</h1>
+            <p class="page-subtitle">以学号标识，保护个人隐私</p>
+
+            <!-- 统计图表 -->
+            <div class="stats-section">
+                <div class="chart-container">
+                    <svg class="donut-chart" viewBox="0 0 200 200">
+                        <circle cx="100" cy="100" r="80" fill="none" stroke="#EEEEEE" stroke-width="30"/>
+                        <circle cx="100" cy="100" r="80" fill="none" stroke="#87A96B" stroke-width="30"
+                                stroke-dasharray="302 502" stroke-dashoffset="0" transform="rotate(-90 100 100)"/>
+                    </svg>
+                    <div class="chart-center">
+                        <span class="chart-label">报名率</span>
+                        <span class="chart-value">60.4%</span>
+                    </div>
+                </div>
+                <div class="stats-info">
+                    <div class="stat-item confirmed">
+                        <span class="stat-value">32</span>
+                        <span class="stat-label">确定参加</span>
+                    </div>
+                    <div class="stat-item pending">
+                        <span class="stat-value">21</span>
+                        <span class="stat-label">未回复</span>
+                    </div>
+                    <div class="stat-item total">
+                        <span class="stat-value">53</span>
+                        <span class="stat-label">总人数</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 图例说明 -->
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="legend-color confirmed"></div>
+                    <span>确定参加</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color pending"></div>
+                    <span>未回复</span>
+                </div>
+            </div>
+
+            <!-- 学号网格 -->
+            <div class="id-section">
+                <h2 class="section-heading">学号一览</h2>
+                <div class="id-grid" id="idGrid"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-logo">
+                <span class="logo-number">20</span>
+                <span class="logo-years">06-26</span>
+            </div>
+            <p class="footer-text">浙工大给排水2006届 毕业20周年同学会</p>
+            <p class="footer-tagline">廿载同窗 · 水长流远</p>
+            <p class="footer-copy">© 2026 同学会筹备组</p>
+        </div>
+    </footer>
+
+    <script>
+        // 学号数据
+        const signupData = [
+            { id: 101, status: 'confirmed' },
+            { id: 102, status: 'confirmed' },
+            { id: 103, status: 'pending' },
+            { id: 104, status: 'confirmed' },
+            { id: 105, status: 'pending' },
+            { id: 106, status: 'confirmed' },
+            { id: 107, status: 'confirmed' },
+            { id: 108, status: 'confirmed' },
+            { id: 111, status: 'pending' },
+            { id: 112, status: 'pending' },
+            { id: 113, status: 'pending' },
+            { id: 114, status: 'confirmed' },
+            { id: 115, status: 'confirmed' },
+            { id: 116, status: 'pending' },
+            { id: 117, status: 'confirmed' },
+            { id: 118, status: 'confirmed' },
+            { id: 119, status: 'confirmed' },
+            { id: 120, status: 'confirmed' },
+            { id: 121, status: 'pending' },
+            { id: 122, status: 'pending' },
+            { id: 123, status: 'pending' },
+            { id: 124, status: 'pending' },
+            { id: 125, status: 'confirmed' },
+            { id: 126, status: 'confirmed' },
+            { id: 127, status: 'pending' },
+            { id: 128, status: 'confirmed' },
+            { id: 201, status: 'confirmed' },
+            { id: 202, status: 'pending' },
+            { id: 203, status: 'confirmed' },
+            { id: 204, status: 'pending' },
+            { id: 205, status: 'pending' },
+            { id: 206, status: 'confirmed' },
+            { id: 207, status: 'pending' },
+            { id: 208, status: 'confirmed' },
+            { id: 209, status: 'pending' },
+            { id: 210, status: 'confirmed' },
+            { id: 211, status: 'confirmed' },
+            { id: 212, status: 'confirmed' },
+            { id: 213, status: 'confirmed' },
+            { id: 214, status: 'pending' },
+            { id: 215, status: 'confirmed' },
+            { id: 216, status: 'confirmed' },
+            { id: 217, status: 'pending' },
+            { id: 218, status: 'pending' },
+            { id: 219, status: 'confirmed' },
+            { id: 220, status: 'pending' },
+            { id: 221, status: 'confirmed' },
+            { id: 222, status: 'confirmed' },
+            { id: 223, status: 'confirmed' },
+            { id: 224, status: 'confirmed' },
+            { id: 225, status: 'pending' },
+            { id: 226, status: 'confirmed' },
+            { id: 227, status: 'confirmed' }
+        ];
+
+        // 渲染学号网格
+        function renderIdGrid() {
+            const grid = document.getElementById('idGrid');
+            signupData.forEach(item => {
+                const card = document.createElement('div');
+                card.className = `id-card ${item.status}`;
+                card.innerHTML = `<span class="id-number">${item.id}</span>`;
+                grid.appendChild(card);
+            });
+        }
+
+        // 页面加载后渲染
+        renderIdGrid();
+    </script>
+</body>
+</html>

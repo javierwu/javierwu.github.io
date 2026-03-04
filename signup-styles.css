@@ -1,0 +1,239 @@
+/* 报名状态页面样式 */
+
+.signup-page {
+    padding: 60px 20px 80px;
+    background: linear-gradient(180deg, #f8fcf8 0%, #ffffff 100%);
+    min-height: calc(100vh - 200px);
+}
+
+.page-title {
+    font-size: 36px;
+    color: #2C5530;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.page-subtitle {
+    font-size: 16px;
+    color: #888;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+/* 统计图表区 */
+.stats-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 60px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.chart-container {
+    position: relative;
+    width: 220px;
+    height: 220px;
+}
+
+.donut-chart {
+    width: 100%;
+    height: 100%;
+}
+
+.chart-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.chart-label {
+    display: block;
+    font-size: 14px;
+    color: #888;
+}
+
+.chart-value {
+    display: block;
+    font-size: 36px;
+    font-weight: 700;
+    color: #87A96B;
+}
+
+/* 统计信息 */
+.stats-info {
+    display: flex;
+    gap: 30px;
+}
+
+.stat-item {
+    text-align: center;
+    padding: 20px 30px;
+    border-radius: 15px;
+    min-width: 100px;
+}
+
+.stat-item.confirmed {
+    background: linear-gradient(135deg, #87A96B 0%, #6B8E5A 100%);
+    color: white;
+}
+
+.stat-item.pending {
+    background: #EEEEEE;
+    color: #888;
+}
+
+.stat-item.total {
+    background: linear-gradient(135deg, #D4A574 0%, #B8946A 100%);
+    color: white;
+}
+
+.stat-value {
+    display: block;
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.stat-label {
+    display: block;
+    font-size: 14px;
+}
+
+/* 图例 */
+.legend {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-bottom: 50px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    color: #555;
+}
+
+.legend-color {
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+}
+
+.legend-color.confirmed {
+    background: #87A96B;
+}
+
+.legend-color.pending {
+    background: #EEEEEE;
+}
+
+/* 学号网格区 */
+.id-section {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 10px 40px rgba(135, 169, 107, 0.1);
+}
+
+.section-heading {
+    font-size: 24px;
+    color: #2C5530;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.id-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+    gap: 15px;
+}
+
+.id-card {
+    aspect-ratio: 1;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    cursor: default;
+}
+
+.id-card.confirmed {
+    background: #87A96B;
+    color: white;
+    box-shadow: 0 4px 15px rgba(135, 169, 107, 0.3);
+}
+
+.id-card.confirmed:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(135, 169, 107, 0.4);
+}
+
+.id-card.pending {
+    background: #EEEEEE;
+    color: #AAAAAA;
+}
+
+.id-card.pending:hover {
+    background: #E5E5E5;
+}
+
+/* 导航激活状态 */
+.nav-menu a.active {
+    background: rgba(255, 255, 255, 0.3) !important;
+}
+
+/* 响应式 */
+@media (max-width: 768px) {
+    .page-title {
+        font-size: 28px;
+    }
+
+    .stats-section {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .stats-info {
+        width: 100%;
+        justify-content: space-around;
+    }
+
+    .stat-item {
+        padding: 15px 20px;
+        min-width: 70px;
+    }
+
+    .stat-value {
+        font-size: 28px;
+    }
+
+    .chart-container {
+        width: 180px;
+        height: 180px;
+    }
+
+    .chart-value {
+        font-size: 28px;
+    }
+
+    .id-section {
+        padding: 25px;
+    }
+
+    .id-grid {
+        grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+        gap: 10px;
+    }
+
+    .id-card {
+        font-size: 15px;
+    }
+}
