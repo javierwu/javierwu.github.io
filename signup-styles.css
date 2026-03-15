@@ -65,7 +65,9 @@
 /* 统计信息 */
 .stats-info {
     display: flex;
-    gap: 30px;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .stat-item {
@@ -83,6 +85,11 @@
 .stat-item.pending {
     background: #EEEEEE;
     color: #888;
+}
+
+.stat-item.tentative {
+    background: linear-gradient(135deg, #F5C542 0%, #E8B831 100%);
+    color: white;
 }
 
 .stat-item.total {
@@ -130,6 +137,10 @@
 
 .legend-color.pending {
     background: #EEEEEE;
+}
+
+.legend-color.tentative {
+    background: #F5C542;
 }
 
 /* 学号网格区 */
@@ -185,6 +196,17 @@
     background: #E5E5E5;
 }
 
+.id-card.tentative {
+    background: #F5C542;
+    color: white;
+    box-shadow: 0 4px 15px rgba(245, 197, 66, 0.3);
+}
+
+.id-card.tentative:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(245, 197, 66, 0.4);
+}
+
 /* 导航激活状态 */
 .nav-menu a.active {
     background: rgba(255, 255, 255, 0.3) !important;
@@ -203,12 +225,13 @@
 
     .stats-info {
         width: 100%;
-        justify-content: space-around;
+        justify-content: center;
+        gap: 10px;
     }
 
     .stat-item {
-        padding: 15px 20px;
-        min-width: 70px;
+        padding: 12px 15px;
+        min-width: 60px;
     }
 
     .stat-value {
