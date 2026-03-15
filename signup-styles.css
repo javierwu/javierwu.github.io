@@ -88,7 +88,7 @@
 }
 
 .stat-item.tentative {
-    background: linear-gradient(135deg, #F5C542 0%, #E8B831 100%);
+    background: linear-gradient(135deg, #FFC107 0%, #FFA000 100%);
     color: white;
 }
 
@@ -140,7 +140,7 @@
 }
 
 .legend-color.tentative {
-    background: #F5C542;
+    background: #FFC107;
 }
 
 /* 学号网格区 */
@@ -197,14 +197,14 @@
 }
 
 .id-card.tentative {
-    background: #F5C542;
+    background: #FFC107;
     color: white;
-    box-shadow: 0 4px 15px rgba(245, 197, 66, 0.3);
+    box-shadow: 0 4px 15px rgba(255, 193, 7, 0.4);
 }
 
 .id-card.tentative:hover {
     transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(245, 197, 66, 0.4);
+    box-shadow: 0 6px 20px rgba(255, 193, 7, 0.5);
 }
 
 /* 导航激活状态 */
