@@ -59,40 +59,25 @@
             <div class="form-card card-hidden" id="formCard">
                 <div class="verified-badge">
                     <span class="check">✓</span>
-                    <span>学号 <strong id="verifiedIdDisplay"></strong> 已验证</span>
+                    <span><strong id="verifiedIdDisplay"></strong> 已验证</span>
                 </div>
 
-                <!-- 是否带配偶 -->
+                <!-- 本人身份证 -->
                 <div class="form-group">
-                    <label class="form-label">是否携带配偶？</label>
-                    <div class="radio-group">
-                        <div class="radio-pill">
-                            <input type="radio" name="bringingSpouse" id="spouseNo" value="no" checked>
-                            <label for="spouseNo">否</label>
-                        </div>
-                        <div class="radio-pill">
-                            <input type="radio" name="bringingSpouse" id="spouseYes" value="yes">
-                            <label for="spouseYes">是</label>
-                        </div>
-                    </div>
+                    <label class="form-label">本人身份证号 <span class="required">*</span></label>
+                    <input type="text" id="idCard" class="form-input"
+                           placeholder="请输入18位身份证号码" maxlength="18">
+                    <p class="field-hint">用于购买活动意外险，不会公开</p>
                 </div>
 
-                <!-- 配偶姓名 -->
-                <div class="form-group" id="spouseNameGroup" style="display:none;">
-                    <label class="form-label">配偶姓名</label>
-                    <input type="text" id="spouseName" class="form-input" placeholder="请输入配偶姓名">
+                <!-- 随行家属 -->
+                <div class="section-header">
+                    <label class="form-label">随行家属</label>
+                    <button type="button" id="addMemberBtn" class="btn-add-member">+ 添加家属</button>
                 </div>
-
-                <!-- 子女人数 -->
-                <div class="form-group">
-                    <label class="form-label">携带子女人数</label>
-                    <input type="number" id="childrenCount" class="form-input"
-                           value="0" min="0" max="10">
-                    <p style="font-size:13px; color:#aaa; margin-top:6px;">18岁以下子女免费参加</p>
-                </div>
-
-                <!-- 子女年龄（动态） -->
-                <div id="childrenAgesContainer" class="children-ages-container"></div>
+                <p class="field-hint" style="margin-top:-10px; margin-bottom:15px;">如无随行家属，无需添加</p>
+                <div id="membersContainer"></div>
+                <div class="form-error" id="memberError"></div>
 
                 <!-- 房间类型 -->
                 <div class="form-group">
@@ -115,7 +100,7 @@
                             <label for="roomShared">拼房</label>
                         </div>
                     </div>
-                    <p id="roomHint" style="font-size:13px; color:#aaa; margin-top:6px; display:none;">拼房仅限一人参加（不带家属）的同学选择</p>
+                    <p id="roomHint" class="field-hint" style="display:none;">拼房仅限不带随行家属的同学选择</p>
                 </div>
 
                 <!-- 忌口 -->
@@ -132,14 +117,6 @@
                               placeholder="如有其他需求请填写，无则留空"></textarea>
                 </div>
 
-                <!-- 身份证号 -->
-                <div class="form-group">
-                    <label class="form-label">身份证号<span style="color:var(--terracotta-red);">（必填，用于购买活动保险）</span></label>
-                    <input type="text" id="idCard" class="form-input"
-                           placeholder="请输入18位身份证号码" maxlength="18">
-                    <p style="font-size:13px; color:#aaa; margin-top:6px;">仅用于购买活动意外险，不会公开</p>
-                </div>
-
                 <button class="btn-submit" id="submitBtn">提交信息</button>
                 <div class="form-error" id="submitError"></div>
             </div>
@@ -154,16 +131,8 @@
                         <td id="summaryName"></td>
                     </tr>
                     <tr>
-                        <td>学号</td>
-                        <td id="summaryId"></td>
-                    </tr>
-                    <tr>
-                        <td>配偶</td>
-                        <td id="summarySpouse"></td>
-                    </tr>
-                    <tr>
-                        <td>子女</td>
-                        <td id="summaryChildren"></td>
+                        <td>房间</td>
+                        <td id="summaryRoom"></td>
                     </tr>
                     <tr>
                         <td>忌口</td>
@@ -174,6 +143,7 @@
                         <td id="summarySpecial"></td>
                     </tr>
                 </table>
+                <div id="summaryMembers"></div>
                 <p style="text-align:center; font-size:14px; color:#888; margin-bottom:10px;">信息已记录，如需修改请联系筹备组</p>
                 <a href="index.html" class="back-link">← 返回首页</a>
             </div>

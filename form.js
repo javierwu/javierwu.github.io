@@ -1,6 +1,3 @@
-// ========================================
-// Supabase 配置
-// ========================================
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
 
 const SUPABASE_URL = 'https://wdkjwfvgfuhyczdspbii.supabase.co';
@@ -10,6 +7,7 @@ const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 let verifiedStudentId = null;
 let verifiedName = null;
+let memberCount = 0;
 
 // ========================================
 // 阶段1：身份验证（姓名+学号）
@@ -71,86 +69,122 @@ async function verifyIdentity() {
 }
 
 // ========================================
-// 阶段2：表单交互
+// 阶段2：随行家属管理
 // ========================================
-function toggleSpouseField(show) {
-    document.getElementById('spouseNameGroup').style.display = show ? 'block' : 'none';
-    if (!show) {
-        document.getElementById('spouseName').value = '';
+function addMember() {
+    memberCount++;
+    var idx = memberCount;
+    var container = document.getElementById('membersContainer');
+    var card = document.createElement('div');
+    card.className = 'member-card';
+    card.dataset.index = idx;
+    card.innerHTML =
+        '<div class="member-card-header">' +
+            '<span class="member-card-title">随行家属 ' + idx + '</span>' +
+            '<button type="button" class="btn-remove-member" data-idx="' + idx + '">×</button>' +
+        '</div>' +
+        '<div class="member-card-body">' +
+            '<div class="form-row">' +
+                '<div class="form-group form-group-half">' +
+                    '<input type="text" class="form-input member-name" placeholder="姓名">' +
+                '</div>' +
+                '<div class="form-group form-group-half">' +
+                    '<input type="text" class="form-input member-idcard" placeholder="身份证号" maxlength="18">' +
+                '</div>' +
+            '</div>' +
+            '<div class="form-group">' +
+                '<div class="radio-group radio-group-sm">' +
+                    '<div class="radio-pill">' +
+                        '<input type="radio" name="mtype_' + idx + '" value="spouse" checked>' +
+                        '<label>配偶</label>' +
+                    '</div>' +
+                    '<div class="radio-pill">' +
+                        '<input type="radio" name="mtype_' + idx + '" value="child">' +
+                        '<label>子女</label>' +
+                    '</div>' +
+                '</div>' +
+            '</div>' +
+            '<div class="form-group member-age-group" style="display:none;">' +
+                '<input type="number" class="form-input member-age" placeholder="年龄（岁）" min="0" max="18">' +
+            '</div>' +
+        '</div>';
+    container.appendChild(card);
+
+    card.querySelector('.btn-remove-member').addEventListener('click', function() {
+        removeMember(idx);
+    });
+    card.querySelectorAll('input[name="mtype_' + idx + '"]').forEach(function(radio) {
+        radio.addEventListener('change', function() {
+            card.querySelector('.member-age-group').style.display =
+                this.value === 'child' ? 'block' : 'none';
+            if (this.value === 'spouse') {
+                card.querySelector('.member-age').value = '';
+            }
+        });
+    });
+
+    hideError(document.getElementById('memberError'));
+}
+
+function removeMember(idx) {
+    var card = document.querySelector('.member-card[data-index="' + idx + '"]');
+    if (card) {
+        card.remove();
     }
 }
 
 function updateRoomOptions() {
-    var hasSpouse = document.querySelector('input[name="bringingSpouse"]:checked').value === 'yes';
-    var childCount = parseInt(document.getElementById('childrenCount').value) || 0;
-    var alone = !hasSpouse && childCount === 0;
-    var sharedRadio = document.getElementById('roomShared');
-    var sharedPill = document.getElementById('sharedPill');
-    var roomHint = document.getElementById('roomHint');
-
-    if (alone) {
-        sharedRadio.disabled = false;
-        sharedPill.classList.remove('pill-disabled');
-        roomHint.style.display = 'none';
-    } else {
-        sharedRadio.disabled = true;
-        sharedPill.classList.add('pill-disabled');
-        roomHint.style.display = 'block';
-        if (sharedRadio.checked) {
-            document.getElementById('roomTwin').checked = true;
-        }
-    }
-}
-
-function updateChildrenAgeInputs() {
-    var count = parseInt(document.getElementById('childrenCount').value) || 0;
-    var container = document.getElementById('childrenAgesContainer');
-    container.innerHTML = '';
-
-    for (var i = 1; i <= count; i++) {
-        var div = document.createElement('div');
-        div.className = 'child-age-input';
-        div.innerHTML =
-            '<label>第' + i + '个孩子</label>' +
-            '<input type="number" class="form-input child-age" min="0" max="18" placeholder="年龄（岁）" data-index="' + i + '">';
-        container.appendChild(div);
-    }
 }
 
 // ========================================
-// 阶段2：提交
+// 阶段2：验证 + 提交
 // ========================================
+function validateIdCard(val, prefix) {
+    if (!val) return prefix + '请填写身份证号';
+    if (val.length !== 18) return prefix + '身份证号应为18位';
+    if (!/^\d{17}[\dXx]$/.test(val)) return prefix + '身份证号格式不正确';
+    return '';
+}
+
 async function submitFamilyInfo() {
     var btn = document.getElementById('submitBtn');
     var errorEl = document.getElementById('submitError');
 
-    var bringingSpouse = document.querySelector('input[name="bringingSpouse"]:checked').value === 'yes';
-    var spouseName = bringingSpouse ? document.getElementById('spouseName').value.trim() : null;
-    var childrenCount = parseInt(document.getElementById('childrenCount').value) || 0;
-    var childAgeInputs = document.querySelectorAll('.child-age');
-    var childrenAges = [];
-    childAgeInputs.forEach(function(input) {
-        var val = input.value.trim();
-        if (val !== '') childrenAges.push(val);
-    });
+    // 本人身份证
+    var idCard = document.getElementById('idCard').value.trim();
+    var err = validateIdCard(idCard, '本人');
+    if (err) { showError(errorEl, err); return; }
+
+    // 收集家属
+    var memberCards = document.querySelectorAll('.member-card');
+    var members = [];
+    var seenIdCards = [idCard];
+    for (var i = 0; i < memberCards.length; i++) {
+        var card = memberCards[i];
+        var mName = card.querySelector('.member-name').value.trim();
+        var mIdCard = card.querySelector('.member-idcard').value.trim();
+        var mType = card.querySelector('input[name^="mtype_"]:checked').value;
+        var mAge = mType === 'child' ? (parseInt(card.querySelector('.member-age').value) || null) : null;
+
+        err = validateIdCard(mIdCard, '家属');
+        if (err) { showError(errorEl, err); return; }
+        if (!mName) { showError(errorEl, '请填写家属姓名'); return; }
+        if (seenIdCards.indexOf(mIdCard) !== -1) {
+            showError(errorEl, '身份证号不能重复');
+            return;
+        }
+        seenIdCards.push(mIdCard);
+        members.push({ name: mName, id_card: mIdCard, type: mType, age: mAge });
+    }
+
     var roomType = document.querySelector('input[name="roomType"]:checked').value;
+    if (roomType === 'shared' && members.length > 0) {
+        showError(errorEl, '拼房仅限不带随行家属的同学选择，请更换房型');
+        return;
+    }
+
     var dietaryRestrictions = document.getElementById('dietaryRestrictions').value.trim();
     var specialNeeds = document.getElementById('specialNeeds').value.trim();
-    var idCard = document.getElementById('idCard').value.trim();
-
-    if (bringingSpouse && !spouseName) {
-        showError(errorEl, '请填写配偶姓名');
-        return;
-    }
-
-    if (!idCard) {
-        showError(errorEl, '请填写身份证号（用于购买保险）');
-        return;
-    }
-    if (idCard.length !== 18) {
-        showError(errorEl, '身份证号应为18位');
-        return;
-    }
 
     btn.disabled = true;
     btn.textContent = '提交中...';
@@ -161,14 +195,11 @@ async function submitFamilyInfo() {
             .from('family_info')
             .insert({
                 student_id: verifiedStudentId,
-                bringing_spouse: bringingSpouse,
-                spouse_name: spouseName,
-                children_count: childrenCount,
-                children_ages: childrenAges.join(','),
+                student_id_card: idCard,
+                members: members,
+                room_type: roomType,
                 dietary_restrictions: dietaryRestrictions,
-                special_needs: specialNeeds,
-                id_card: idCard,
-                room_type: roomType
+                special_needs: specialNeeds
             });
 
         if (result.error) {
@@ -184,11 +215,8 @@ async function submitFamilyInfo() {
 
         showSuccess({
             name: verifiedName,
-            studentId: verifiedStudentId,
-            bringingSpouse: bringingSpouse,
-            spouseName: spouseName,
-            childrenCount: childrenCount,
-            childrenAges: childrenAges,
+            roomType: roomType,
+            members: members,
             dietaryRestrictions: dietaryRestrictions,
             specialNeeds: specialNeeds
         });
@@ -214,19 +242,20 @@ function showSuccess(info) {
     card.classList.add('card-fade-in');
 
     document.getElementById('summaryName').textContent = info.name;
-    document.getElementById('summaryId').textContent = info.studentId;
 
-    var spouseText = info.bringingSpouse ? '是' : '否';
-    if (info.bringingSpouse && info.spouseName) {
-        spouseText += '（' + info.spouseName + '）';
-    }
-    document.getElementById('summarySpouse').textContent = spouseText;
+    var roomMap = { twin: '双床房', king: '大床房', family: '家庭房', shared: '拼房' };
+    document.getElementById('summaryRoom').textContent = roomMap[info.roomType] || info.roomType;
 
-    var childrenText = info.childrenCount > 0 ? info.childrenCount + '人' : '无';
-    if (info.childrenAges.length > 0) {
-        childrenText += '，年龄：' + info.childrenAges.join('、') + '岁';
+    var membersHtml = '';
+    if (info.members.length > 0) {
+        membersHtml = '<div class="summary-section-title">随行家属</div>';
+        info.members.forEach(function(m) {
+            var label = m.type === 'spouse' ? '配偶' : '子女';
+            if (m.type === 'child' && m.age) label += '（' + m.age + '岁）';
+            membersHtml += '<div class="summary-member-item">' + m.name + ' · ' + label + '</div>';
+        });
     }
-    document.getElementById('summaryChildren').textContent = childrenText;
+    document.getElementById('summaryMembers').innerHTML = membersHtml;
 
     document.getElementById('summaryDietary').textContent = info.dietaryRestrictions || '无';
     document.getElementById('summarySpecial').textContent = info.specialNeeds || '无';
@@ -256,16 +285,6 @@ document.addEventListener('DOMContentLoaded', function() {
         if (e.key === 'Enter') verifyIdentity();
     });
 
-    document.querySelectorAll('input[name="bringingSpouse"]').forEach(function(radio) {
-        radio.addEventListener('change', function() {
-            toggleSpouseField(this.value === 'yes');
-            updateRoomOptions();
-        });
-    });
-
-    document.getElementById('childrenCount').addEventListener('input', function() {
-        updateChildrenAgeInputs();
-        updateRoomOptions();
-    });
+    document.getElementById('addMemberBtn').addEventListener('click', addMember);
     document.getElementById('submitBtn').addEventListener('click', submitFamilyInfo);
 });

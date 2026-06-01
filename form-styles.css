@@ -164,6 +164,112 @@
     border-color: var(--water-light);
 }
 
+/* 必填标记 */
+.required {
+    color: var(--terracotta-red);
+}
+
+/* 字段提示 */
+.field-hint {
+    font-size: 13px;
+    color: #aaa;
+    margin-top: 6px;
+}
+
+/* 板块标题行（标题 + 按钮） */
+.section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 6px;
+}
+
+/* 添加家属按钮 */
+.btn-add-member {
+    background: none;
+    border: 2px dashed var(--campus-green);
+    color: var(--campus-green);
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.3s;
+}
+
+.btn-add-member:hover {
+    background: var(--campus-green);
+    color: var(--pure-white);
+}
+
+/* 家属卡片 */
+.member-card {
+    background: var(--cream-white);
+    border-radius: 14px;
+    padding: 18px;
+    margin-bottom: 12px;
+    animation: fadeInUp 0.3s ease-out;
+}
+
+.member-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.member-card-title {
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--dark-gray);
+}
+
+.btn-remove-member {
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: #ccc;
+    cursor: pointer;
+    padding: 0 4px;
+    line-height: 1;
+}
+
+.btn-remove-member:hover {
+    color: var(--terracotta-red);
+}
+
+/* 双列表单行 */
+.form-row {
+    display: flex;
+    gap: 12px;
+}
+
+.form-group-half {
+    flex: 1;
+}
+
+/* 小号单选按钮组 */
+.radio-group-sm .radio-pill label {
+    padding: 8px 20px;
+    font-size: 14px;
+}
+
+/* 提交摘要 - 家属列表 */
+.summary-section-title {
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--dark-gray);
+    margin: 15px 0 8px;
+    padding-top: 12px;
+    border-top: 1px solid var(--water-light);
+}
+
+.summary-member-item {
+    font-size: 14px;
+    color: #666;
+    padding: 4px 0;
+}
+
 /* 文本域 */
 .form-textarea {
     width: 100%;
