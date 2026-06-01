@@ -254,6 +254,34 @@
     font-size: 14px;
 }
 
+/* 家属类型 div 切换 */
+.type-pill-row {
+    display: flex;
+    gap: 12px;
+}
+
+.type-pill {
+    display: inline-block;
+    padding: 8px 24px;
+    border: 2px solid var(--water-light);
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s;
+    color: var(--dark-gray);
+    user-select: none;
+}
+
+.type-pill:hover {
+    border-color: var(--campus-green);
+}
+
+.type-pill.active {
+    background: var(--campus-green);
+    color: var(--pure-white);
+    border-color: var(--campus-green);
+}
+
 /* 提交摘要 - 家属列表 */
 .summary-section-title {
     font-weight: 600;

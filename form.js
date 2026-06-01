@@ -93,15 +93,10 @@ function addMember() {
                 '</div>' +
             '</div>' +
             '<div class="form-group">' +
-                '<div class="radio-group radio-group-sm">' +
-                    '<div class="radio-pill">' +
-                        '<input type="radio" name="mtype_' + idx + '" id="mtype_' + idx + '_spouse" value="spouse" checked>' +
-                        '<label for="mtype_' + idx + '_spouse">配偶</label>' +
-                    '</div>' +
-                    '<div class="radio-pill">' +
-                        '<input type="radio" name="mtype_' + idx + '" id="mtype_' + idx + '_child" value="child">' +
-                        '<label for="mtype_' + idx + '_child">子女</label>' +
-                    '</div>' +
+                '<div class="type-pill-row">' +
+                    '<div class="type-pill active" data-mtype="spouse" data-midx="' + idx + '">配偶</div>' +
+                    '<div class="type-pill" data-mtype="child" data-midx="' + idx + '">子女</div>' +
+                    '<input type="hidden" class="member-type-value" value="spouse">' +
                 '</div>' +
             '</div>' +
             '<div class="form-group member-age-group" style="display:none;">' +
@@ -113,11 +108,14 @@ function addMember() {
     card.querySelector('.btn-remove-member').addEventListener('click', function() {
         removeMember(idx);
     });
-    card.querySelectorAll('input[name="mtype_' + idx + '"]').forEach(function(radio) {
-        radio.addEventListener('change', function() {
+    card.querySelectorAll('.type-pill[data-midx="' + idx + '"]').forEach(function(pill) {
+        pill.addEventListener('click', function() {
+            card.querySelectorAll('.type-pill[data-midx="' + idx + '"]').forEach(function(p) { p.classList.remove('active'); });
+            this.classList.add('active');
+            card.querySelector('.member-type-value').value = this.dataset.mtype;
             card.querySelector('.member-age-group').style.display =
-                this.value === 'child' ? 'block' : 'none';
-            if (this.value === 'spouse') {
+                this.dataset.mtype === 'child' ? 'block' : 'none';
+            if (this.dataset.mtype === 'spouse') {
                 card.querySelector('.member-age').value = '';
             }
         });
@@ -172,7 +170,7 @@ async function submitFamilyInfo() {
         var card = memberCards[i];
         var mName = card.querySelector('.member-name').value.trim();
         var mIdCard = card.querySelector('.member-idcard').value.trim();
-        var mType = card.querySelector('input[name^="mtype_"]:checked').value;
+        var mType = card.querySelector('.member-type-value').value;
         var mAge = mType === 'child' ? (parseInt(card.querySelector('.member-age').value) || null) : null;
 
         err = validateIdCard(mIdCard, '家属');
