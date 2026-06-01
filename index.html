@@ -20,7 +20,7 @@
                 <li><a href="#options">方案</a></li>
                 <li><a href="timeline.html">时间轴</a></li>
                 <li><a href="signup.html">报名状态</a></li>
-                <li><a href="#survey">调查</a></li>
+                <li><a href="#survey">结果</a></li>
                 <li><a href="#contact">联系</a></li>
             </ul>
         </div>
@@ -43,7 +43,7 @@
                 <span class="year-end">2026</span>
             </div>
             <a href="#options" class="btn btn-primary">查看方案</a>
-            <a href="#survey" class="btn btn-secondary">参与调查</a>
+            <a href="signup.html" class="btn btn-secondary">报名状态</a>
         </div>
     </section>
 
@@ -74,14 +74,14 @@
     <!-- 方案部分 -->
     <section id="options" class="options">
         <div class="container">
-            <h2 class="section-title">三方案对比</h2>
-            <p class="section-subtitle">请仔细阅读后选择你心仪的方案</p>
+            <h2 class="section-title">活动方案</h2>
+            <p class="section-subtitle">已确定：杭州深度怀旧游 | 6月27-28日</p>
 
             <div class="options-grid">
                 <!-- 方案A -->
-                <div class="option-card option-a">
-                    <div class="option-header">
-                        <span class="option-tag">🏫 深度怀旧</span>
+                <div class="option-card option-a" style="border-color: var(--campus-green); box-shadow: 0 0 0 3px var(--campus-green), 0 8px 30px rgba(135,169,107,0.3);">
+                    <div class="option-header" style="background: linear-gradient(135deg, var(--campus-green), var(--campus-green-dark));">
+                        <span class="option-tag" style="background: rgba(255,255,255,0.2);">已确定</span>
                         <h3>方案A：杭州深度怀旧游</h3>
                     </div>
                     <div class="option-body">
@@ -97,40 +97,40 @@
                     </div>
                 </div>
 
-                <!-- 方案B -->
-                <div class="option-card option-b">
+                <!-- 方案B（备选） -->
+                <div class="option-card option-b" style="opacity: 0.5;">
                     <div class="option-header">
                         <span class="option-tag">🏞️ 度假休闲</span>
                         <h3>方案B：千岛湖度假休闲游</h3>
                     </div>
                     <div class="option-body">
                         <ul class="option-features">
-                            <li>✅ 朝晖校区怀旧活动</li>
-                            <li>✅ 千岛湖湖景酒店</li>
-                            <li>✅ 游艇/骑行湖景活动</li>
-                            <li>✅ 封闭社交，亲子友好</li>
+                            <li>朝晖校区怀旧活动</li>
+                            <li>千岛湖湖景酒店</li>
+                            <li>游艇/骑行湖景活动</li>
+                            <li>封闭社交，亲子友好</li>
                         </ul>
                         <div class="option-suit">
-                            <strong>适合：</strong>想全家度假、带娃、深度封闭社交
+                            <strong>备选方案</strong>
                         </div>
                     </div>
                 </div>
 
-                <!-- 方案C -->
-                <div class="option-card option-c">
+                <!-- 方案C（备选） -->
+                <div class="option-card option-c" style="opacity: 0.5;">
                     <div class="option-header">
                         <span class="option-tag">🌊 异地聚会</span>
                         <h3>方案C：宁波异地聚会游</h3>
                     </div>
                     <div class="option-body">
                         <ul class="option-features">
-                            <li>✅ 自行前往宁波集合</li>
-                            <li>✅ 团建晚宴活动</li>
-                            <li>✅ 城市观光游览</li>
-                            <li>✅ 异地聚会，新鲜环境</li>
+                            <li>自行前往宁波集合</li>
+                            <li>团建晚宴活动</li>
+                            <li>城市观光游览</li>
+                            <li>异地聚会，新鲜环境</li>
                         </ul>
                         <div class="option-suit">
-                            <strong>适合：</strong>宁波本地同学、想要新鲜感、江浙沪便利
+                            <strong>备选方案</strong>
                         </div>
                     </div>
                 </div>
@@ -325,53 +325,31 @@
         <div class="container">
             <h2 class="section-title">📅 日期选项</h2>
             <div class="dates-grid">
-                <div class="date-card">
-                    <div class="date-month">5月</div>
-                    <div class="date-day">23-24日</div>
-                    <div class="date-weekend">周六日</div>
-                    <div class="date-desc">避开六一</div>
-                </div>
-                <div class="date-card">
-                    <div class="date-month">6月</div>
-                    <div class="date-day">27-28日</div>
-                    <div class="date-weekend">周六日</div>
-                    <div class="date-desc">高考后，天气好</div>
-                </div>
-                <div class="date-card" style="background: transparent; border: 3px dashed #CCCCCC;">
-                    <div class="date-month">其他</div>
-                    <div class="date-day">建议</div>
-                    <div class="date-weekend">欢迎</div>
-                    <div class="date-desc">请提具体时间</div>
+                <div class="date-card confirmed-date" style="background: linear-gradient(135deg, var(--campus-green), var(--campus-green-dark)); border-color: var(--campus-green);">
+                    <div class="date-month" style="color: rgba(255,255,255,0.9);">6月</div>
+                    <div class="date-day" style="color: #fff; font-size: 32px;">27-28日</div>
+                    <div class="date-weekend" style="color: rgba(255,255,255,0.9);">周六日</div>
+                    <div class="date-desc" style="color: #fff; font-weight: 600;">已确定</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 调查问卷 -->
+    <!-- 调查结果 -->
     <section id="survey" class="survey">
         <div class="container">
-            <h2 class="section-title">📝 意向调查</h2>
-            <p class="section-subtitle">请复制以下格式填写，发送至班级微信群</p>
+            <h2 class="section-title">✅ 意向调查已完成</h2>
+            <p class="section-subtitle">感谢各位同学的积极参与！</p>
 
-            <div class="survey-box">
-                <div class="survey-title">微信接龙格式</div>
-                <pre class="survey-format">1. 张三
-   📍城市：杭州
-   📱手机：138xxxx8888
-   ✅意向：确定参加
-   👨‍👩‍👧家属：配偶1人
-   🎯方案：A或C（可多选1-2个）
-   📅日期：5月23-24日、6月27-28日
-   💰预算：可接受
-   🍽️忌口：无
-   👨‍🏫老师：希望能请XXX老师
-   💡建议：期待重走板球场！</pre>
-            </div>
-
-            <div class="survey-info">
-                <p><strong>⏰ 截止时间：</strong>2026年3月15日 24:00</p>
-                <p><strong>📮 提交方式：</strong>复制以上格式，填写后发送至班级微信群</p>
-                <p><strong>🙏 感谢：</strong>你的参与将帮助我们更好地筹备这次难得的重逢！</p>
+            <div class="survey-box" style="background: linear-gradient(135deg, var(--cream-white), var(--pure-white));">
+                <div class="survey-title">调查结果</div>
+                <div class="survey-info" style="text-align: left; padding: 20px;">
+                    <p>📊 报名进度：<strong>47/53人确定参加（88.7%）</strong></p>
+                    <p>📅 活动日期：<strong>6月27-28日（周六日）</strong></p>
+                    <p>🎯 活动方案：<strong>杭州深度怀旧游</strong></p>
+                    <p>💰 预算范围：<strong>1500-1800元/人</strong></p>
+                    <p style="margin-top: 15px;"><a href="signup.html" style="color: var(--campus-green); font-weight: 600;">查看详细报名状态 →</a></p>
+                </div>
             </div>
         </div>
     </section>
