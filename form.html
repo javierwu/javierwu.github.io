@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>家属信息填报 - 浙工大给排水2006届 毕业20周年同学会</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="form-styles.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-number">20</span>
+                <span class="logo-years">06-26</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="index.html#about">关于</a></li>
+                <li><a href="index.html#options">方案</a></li>
+                <li><a href="timeline.html">筹备进度</a></li>
+                <li><a href="signup.html">报名状态</a></li>
+                <li><a href="form.html" class="active">家属信息</a></li>
+                <li><a href="index.html#contact">联系</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 头部 -->
+    <section class="form-hero">
+        <h1>👨‍👩‍👧‍👦 家属信息填报</h1>
+        <p>请确认是否携带家属参加同学会，以便安排住宿和餐饮</p>
+    </section>
+
+    <!-- 主内容 -->
+    <div class="form-page">
+        <div class="form-container">
+
+            <!-- 阶段1：学号验证 -->
+            <div class="verify-card" id="verifyCard">
+                <div class="verify-icon">🔐</div>
+                <h2>学号验证</h2>
+                <p class="verify-desc">请输入你的学号进行身份验证<br>学号仅用于确认身份，不公开显示</p>
+                <div class="form-group">
+                    <input type="number" id="studentIdInput" class="form-input"
+                           placeholder="请输入学号（如 101、215）"
+                           min="100" max="299">
+                </div>
+                <button class="btn-verify" id="verifyBtn">验证学号</button>
+                <div class="form-error" id="verifyError"></div>
+            </div>
+
+            <!-- 阶段2：填写家属信息 -->
+            <div class="form-card card-hidden" id="formCard">
+                <div class="verified-badge">
+                    <span class="check">✓</span>
+                    <span>学号 <strong id="verifiedIdDisplay"></strong> 已验证</span>
+                </div>
+
+                <!-- 是否带配偶 -->
+                <div class="form-group">
+                    <label class="form-label">是否携带配偶？</label>
+                    <div class="radio-group">
+                        <div class="radio-pill">
+                            <input type="radio" name="bringingSpouse" id="spouseNo" value="no" checked>
+                            <label for="spouseNo">否</label>
+                        </div>
+                        <div class="radio-pill">
+                            <input type="radio" name="bringingSpouse" id="spouseYes" value="yes">
+                            <label for="spouseYes">是</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 配偶姓名 -->
+                <div class="form-group" id="spouseNameGroup" style="display:none;">
+                    <label class="form-label">配偶姓名</label>
+                    <input type="text" id="spouseName" class="form-input" placeholder="请输入配偶姓名">
+                </div>
+
+                <!-- 子女人数 -->
+                <div class="form-group">
+                    <label class="form-label">携带子女人数</label>
+                    <input type="number" id="childrenCount" class="form-input"
+                           value="0" min="0" max="10">
+                    <p style="font-size:13px; color:#aaa; margin-top:6px;">18岁以下子女免费参加</p>
+                </div>
+
+                <!-- 子女年龄（动态） -->
+                <div id="childrenAgesContainer" class="children-ages-container"></div>
+
+                <!-- 忌口 -->
+                <div class="form-group">
+                    <label class="form-label">饮食禁忌（忌口）</label>
+                    <textarea id="dietaryRestrictions" class="form-textarea"
+                              placeholder="如有忌口请填写，如：素食、海鲜过敏、不吃辣等，无则留空"></textarea>
+                </div>
+
+                <!-- 特殊需求 -->
+                <div class="form-group">
+                    <label class="form-label">其他特殊需求</label>
+                    <textarea id="specialNeeds" class="form-textarea"
+                              placeholder="如有其他需求请填写，无则留空"></textarea>
+                </div>
+
+                <button class="btn-submit" id="submitBtn">提交信息</button>
+                <div class="form-error" id="submitError"></div>
+            </div>
+
+            <!-- 阶段3a：提交成功 -->
+            <div class="success-card card-hidden" id="successCard">
+                <div class="success-icon">🎉</div>
+                <div class="success-title">提交成功！</div>
+                <table class="summary-table">
+                    <tr>
+                        <td>学号</td>
+                        <td id="summaryId"></td>
+                    </tr>
+                    <tr>
+                        <td>配偶</td>
+                        <td id="summarySpouse"></td>
+                    </tr>
+                    <tr>
+                        <td>子女</td>
+                        <td id="summaryChildren"></td>
+                    </tr>
+                    <tr>
+                        <td>忌口</td>
+                        <td id="summaryDietary"></td>
+                    </tr>
+                    <tr>
+                        <td>其他</td>
+                        <td id="summarySpecial"></td>
+                    </tr>
+                </table>
+                <p style="text-align:center; font-size:14px; color:#888; margin-bottom:10px;">信息已记录，如需修改请联系筹备组</p>
+                <a href="index.html" class="back-link">← 返回首页</a>
+            </div>
+
+            <!-- 阶段3b：已提交过 -->
+            <div class="already-card card-hidden" id="alreadyCard">
+                <div class="already-icon">📋</div>
+                <div class="already-title">你已提交过家属信息</div>
+                <p class="already-desc">
+                    如需修改，请联系筹备组处理<br>
+                    感谢你的配合！
+                </p>
+                <a href="index.html" class="back-link" style="margin-top:20px;">← 返回首页</a>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-logo">
+                <span class="logo-number">20</span>
+                <span class="logo-years">06-26</span>
+            </div>
+            <p class="footer-text">浙工大给排水2006届 毕业20周年同学会</p>
+            <p class="footer-tagline">廿载同窗 · 水长流远</p>
+            <p class="footer-copy">&copy; 2026 同学会筹备组</p>
+        </div>
+    </footer>
+
+    <!-- Supabase SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <!-- 表单逻辑 -->
+    <script src="form.js"></script>
+</body>
+</html>

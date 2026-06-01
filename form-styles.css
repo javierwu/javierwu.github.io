@@ -1,0 +1,412 @@
+/* 家属信息填报页专用样式 */
+
+.form-hero {
+    background: linear-gradient(135deg, var(--campus-green) 0%, var(--water-blue) 100%);
+    padding: 80px 30px 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.form-hero h1 {
+    font-size: 36px;
+    color: var(--pure-white);
+    margin-bottom: 10px;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    position: relative;
+    z-index: 1;
+}
+
+.form-hero p {
+    font-size: 16px;
+    color: rgba(255,255,255,0.9);
+    position: relative;
+    z-index: 1;
+}
+
+.form-page {
+    padding: 50px 20px 80px;
+    background: var(--cream-white);
+    min-height: 60vh;
+}
+
+.form-container {
+    max-width: 560px;
+    margin: 0 auto;
+}
+
+/* 卡片通用 */
+.form-card,
+.verify-card,
+.success-card,
+.already-card {
+    background: var(--pure-white);
+    border-radius: 20px;
+    padding: 35px;
+    box-shadow: 0 10px 40px rgba(135, 169, 107, 0.12);
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.form-card::before,
+.verify-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    border-radius: 20px 20px 0 0;
+    background: linear-gradient(90deg, var(--campus-green), var(--water-blue));
+}
+
+/* 验证阶段标题 */
+.verify-icon {
+    font-size: 48px;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.verify-card h2 {
+    text-align: center;
+    font-size: 24px;
+    color: var(--dark-gray);
+    margin-bottom: 8px;
+}
+
+.verify-card .verify-desc {
+    text-align: center;
+    font-size: 14px;
+    color: #888;
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+
+/* 表单元素 */
+.form-group {
+    margin-bottom: 22px;
+}
+
+.form-label {
+    font-weight: 600;
+    color: var(--dark-gray);
+    margin-bottom: 8px;
+    display: block;
+    font-size: 15px;
+}
+
+.form-input {
+    width: 100%;
+    padding: 14px 18px;
+    border: 2px solid var(--water-light);
+    border-radius: 12px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+    font-family: inherit;
+    box-sizing: border-box;
+    background: var(--pure-white);
+}
+
+.form-input:focus {
+    border-color: var(--campus-green);
+    outline: none;
+}
+
+.form-input::placeholder {
+    color: #bbb;
+}
+
+/* 单选按钮（pill 样式） */
+.radio-group {
+    display: flex;
+    gap: 12px;
+}
+
+.radio-pill {
+    position: relative;
+}
+
+.radio-pill input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.radio-pill label {
+    display: inline-block;
+    padding: 12px 28px;
+    border: 2px solid var(--water-light);
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 15px;
+    transition: all 0.3s;
+    color: var(--dark-gray);
+}
+
+.radio-pill input[type="radio"]:checked + label {
+    background: var(--campus-green);
+    color: var(--pure-white);
+    border-color: var(--campus-green);
+}
+
+.radio-pill label:hover {
+    border-color: var(--campus-green);
+}
+
+/* 文本域 */
+.form-textarea {
+    width: 100%;
+    padding: 14px 18px;
+    min-height: 80px;
+    border: 2px solid var(--water-light);
+    border-radius: 12px;
+    font-size: 16px;
+    resize: vertical;
+    font-family: inherit;
+    box-sizing: border-box;
+    background: var(--pure-white);
+}
+
+.form-textarea:focus {
+    border-color: var(--campus-green);
+    outline: none;
+}
+
+.form-textarea::placeholder {
+    color: #bbb;
+}
+
+/* 验证通过的学号标签 */
+.verified-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--water-light);
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 15px;
+    color: var(--campus-green-dark);
+    font-weight: 600;
+    margin-bottom: 25px;
+}
+
+.verified-badge .check {
+    color: var(--campus-green);
+    font-size: 18px;
+}
+
+/* 子女年龄动态输入 */
+.children-ages-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.child-age-input {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.child-age-input label {
+    font-size: 14px;
+    color: #888;
+    min-width: 90px;
+}
+
+.child-age-input .form-input {
+    flex: 1;
+}
+
+/* 提交按钮 */
+.btn-submit {
+    display: block;
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, var(--campus-green), var(--campus-green-dark));
+    color: var(--pure-white);
+    border: none;
+    border-radius: 25px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(135, 169, 107, 0.3);
+    transition: all 0.3s;
+    margin-top: 10px;
+    font-family: inherit;
+}
+
+.btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(135, 169, 107, 0.4);
+}
+
+.btn-submit:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.btn-verify {
+    display: block;
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, var(--campus-green), var(--campus-green-dark));
+    color: var(--pure-white);
+    border: none;
+    border-radius: 25px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(135, 169, 107, 0.3);
+    transition: all 0.3s;
+    font-family: inherit;
+}
+
+.btn-verify:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(135, 169, 107, 0.4);
+}
+
+.btn-verify:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* 错误提示 */
+.form-error {
+    color: var(--terracotta-red);
+    font-size: 14px;
+    margin-top: 10px;
+    display: none;
+}
+
+.form-error.visible {
+    display: block;
+}
+
+/* 成功状态 */
+.success-icon {
+    font-size: 64px;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.success-title {
+    font-size: 24px;
+    color: var(--campus-green);
+    text-align: center;
+    margin-bottom: 25px;
+    font-weight: 700;
+}
+
+.summary-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 25px;
+}
+
+.summary-table tr {
+    border-bottom: 1px solid var(--water-light);
+}
+
+.summary-table td {
+    padding: 12px 0;
+    font-size: 14px;
+    color: var(--dark-gray);
+}
+
+.summary-table td:first-child {
+    font-weight: 600;
+    color: #888;
+    width: 100px;
+}
+
+/* 已提交状态 */
+.already-icon {
+    font-size: 48px;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.already-title {
+    font-size: 22px;
+    color: var(--nostalgic-gold);
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.already-desc {
+    text-align: center;
+    font-size: 14px;
+    color: #888;
+    line-height: 1.6;
+}
+
+/* 阶段切换 */
+.card-hidden {
+    display: none;
+}
+
+.card-fade-in {
+    animation: fadeInUp 0.5s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 返回按钮 */
+.back-link {
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    color: var(--campus-green);
+    font-weight: 600;
+    font-size: 15px;
+    text-decoration: none;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+/* 响应式 */
+@media (max-width: 768px) {
+    .form-hero h1 {
+        font-size: 28px;
+    }
+
+    .form-card,
+    .verify-card,
+    .success-card,
+    .already-card {
+        padding: 25px 20px;
+    }
+
+    .radio-group {
+        flex-direction: column;
+    }
+
+    .radio-pill label {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* 导航激活状态 */
+.nav-menu a.active {
+    background: rgba(255, 255, 255, 0.3) !important;
+}
