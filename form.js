@@ -1,35 +1,31 @@
 // ========================================
 // Supabase 配置
-// 在 https://supabase.com 创建项目后，替换下方两个值
 // ========================================
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
+
 const SUPABASE_URL = 'https://wdkjwfvgfuhyczdspbii.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_7WskZIDKCtjhGYXcreZLyQ_8jeWpSu4';
 
-let supabaseClient = null;
+const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
 let verifiedStudentId = null;
+let verifiedName = null;
 
 // ========================================
-// 初始化
+// 阶段1：身份验证（姓名+学号）
 // ========================================
-function initSupabase() {
-    if (typeof supabase === 'undefined') {
-        document.getElementById('verifyError').textContent = '系统加载失败，请刷新页面重试';
-        document.getElementById('verifyError').classList.add('visible');
-        document.getElementById('verifyBtn').disabled = true;
+async function verifyIdentity() {
+    var nameInput = document.getElementById('nameInput');
+    var idInput = document.getElementById('studentIdInput');
+    var errorEl = document.getElementById('verifyError');
+    var btn = document.getElementById('verifyBtn');
+    var name = nameInput.value.trim();
+    var studentId = parseInt(idInput.value.trim());
+
+    if (name.length < 2) {
+        showError(errorEl, '请输入姓名');
         return;
     }
-    supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-}
-
-// ========================================
-// 阶段1：学号验证
-// ========================================
-async function verifyStudentId() {
-    const input = document.getElementById('studentIdInput');
-    const errorEl = document.getElementById('verifyError');
-    const btn = document.getElementById('verifyBtn');
-    const studentId = parseInt(input.value.trim());
-
     if (isNaN(studentId) || studentId < 100 || studentId > 299) {
         showError(errorEl, '请输入有效的学号（101-128 或 201-227）');
         return;
@@ -40,33 +36,37 @@ async function verifyStudentId() {
     hideError(errorEl);
 
     try {
-        const { data: student, error } = await supabaseClient
-            .from('student_ids')
-            .select('student_id, dept')
+        var result = await supabaseClient
+            .from('students')
+            .select('student_id, dept, name')
+            .eq('name', name)
             .eq('student_id', studentId)
             .single();
 
-        if (error || !student) {
-            showError(errorEl, '学号不存在，请确认后重试');
+        if (result.error || !result.data) {
+            showError(errorEl, '姓名与学号不匹配，请确认后重试');
             btn.disabled = false;
-            btn.textContent = '验证学号';
+            btn.textContent = '验证身份';
             return;
         }
 
-        verifiedStudentId = studentId;
+        var student = result.data;
+        verifiedStudentId = student.student_id;
+        verifiedName = student.name;
 
         document.getElementById('verifyCard').classList.add('card-hidden');
-        const formCard = document.getElementById('formCard');
+        var formCard = document.getElementById('formCard');
         formCard.classList.remove('card-hidden');
         formCard.classList.add('card-fade-in');
 
-        const deptLabel = student.dept === 1 ? '（1系）' : '（2系）';
-        document.getElementById('verifiedIdDisplay').textContent = studentId + ' ' + deptLabel;
+        var deptLabel = student.dept === 1 ? '1系' : '2系';
+        document.getElementById('verifiedIdDisplay').textContent =
+            student.name + '（' + deptLabel + '）';
 
     } catch (err) {
         showError(errorEl, '验证失败，请检查网络连接后重试');
         btn.disabled = false;
-        btn.textContent = '验证学号';
+        btn.textContent = '验证身份';
     }
 }
 
@@ -81,8 +81,8 @@ function toggleSpouseField(show) {
 }
 
 function updateChildrenAgeInputs() {
-    const count = parseInt(document.getElementById('childrenCount').value) || 0;
-    const container = document.getElementById('childrenAgesContainer');
+    var count = parseInt(document.getElementById('childrenCount').value) || 0;
+    var container = document.getElementById('childrenAgesContainer');
     container.innerHTML = '';
 
     for (var i = 1; i <= count; i++) {
@@ -113,9 +113,15 @@ async function submitFamilyInfo() {
     });
     var dietaryRestrictions = document.getElementById('dietaryRestrictions').value.trim();
     var specialNeeds = document.getElementById('specialNeeds').value.trim();
+    var idCard = document.getElementById('idCard').value.trim();
 
     if (bringingSpouse && !spouseName) {
         showError(errorEl, '请填写配偶姓名');
+        return;
+    }
+
+    if (idCard.length > 0 && idCard.length !== 18) {
+        showError(errorEl, '身份证号应为18位');
         return;
     }
 
@@ -133,7 +139,8 @@ async function submitFamilyInfo() {
                 children_count: childrenCount,
                 children_ages: childrenAges.join(','),
                 dietary_restrictions: dietaryRestrictions,
-                special_needs: specialNeeds
+                special_needs: specialNeeds,
+                id_card: idCard
             });
 
         if (result.error) {
@@ -148,6 +155,7 @@ async function submitFamilyInfo() {
         }
 
         showSuccess({
+            name: verifiedName,
             studentId: verifiedStudentId,
             bringingSpouse: bringingSpouse,
             spouseName: spouseName,
@@ -177,6 +185,7 @@ function showSuccess(info) {
     card.classList.remove('card-hidden');
     card.classList.add('card-fade-in');
 
+    document.getElementById('summaryName').textContent = info.name;
     document.getElementById('summaryId').textContent = info.studentId;
 
     var spouseText = info.bringingSpouse ? '是' : '否';
@@ -211,24 +220,20 @@ function hideError(el) {
 // 事件绑定
 // ========================================
 document.addEventListener('DOMContentLoaded', function() {
-    initSupabase();
-
-    // 验证按钮
-    document.getElementById('verifyBtn').addEventListener('click', verifyStudentId);
+    document.getElementById('verifyBtn').addEventListener('click', verifyIdentity);
+    document.getElementById('nameInput').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') document.getElementById('studentIdInput').focus();
+    });
     document.getElementById('studentIdInput').addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') verifyStudentId();
+        if (e.key === 'Enter') verifyIdentity();
     });
 
-    // 配偶切换
     document.querySelectorAll('input[name="bringingSpouse"]').forEach(function(radio) {
         radio.addEventListener('change', function() {
             toggleSpouseField(this.value === 'yes');
         });
     });
 
-    // 子女数量变化
     document.getElementById('childrenCount').addEventListener('input', updateChildrenAgeInputs);
-
-    // 提交按钮
     document.getElementById('submitBtn').addEventListener('click', submitFamilyInfo);
 });
