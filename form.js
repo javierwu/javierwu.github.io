@@ -95,12 +95,12 @@ function addMember() {
             '<div class="form-group">' +
                 '<div class="radio-group radio-group-sm">' +
                     '<div class="radio-pill">' +
-                        '<input type="radio" name="mtype_' + idx + '" value="spouse" checked>' +
-                        '<label>配偶</label>' +
+                        '<input type="radio" name="mtype_' + idx + '" id="mtype_' + idx + '_spouse" value="spouse" checked>' +
+                        '<label for="mtype_' + idx + '_spouse">配偶</label>' +
                     '</div>' +
                     '<div class="radio-pill">' +
-                        '<input type="radio" name="mtype_' + idx + '" value="child">' +
-                        '<label>子女</label>' +
+                        '<input type="radio" name="mtype_' + idx + '" id="mtype_' + idx + '_child" value="child">' +
+                        '<label for="mtype_' + idx + '_child">子女</label>' +
                     '</div>' +
                 '</div>' +
             '</div>' +
@@ -143,6 +143,15 @@ function validateIdCard(val, prefix) {
     if (!val) return prefix + '请填写身份证号';
     if (val.length !== 18) return prefix + '身份证号应为18位';
     if (!/^\d{17}[\dXx]$/.test(val)) return prefix + '身份证号格式不正确';
+    var weights = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2];
+    var checks = ['1', '0', 'X', '9', '8', '7', '6', '5', '4', '3', '2'];
+    var sum = 0;
+    for (var i = 0; i < 17; i++) {
+        sum += parseInt(val.charAt(i)) * weights[i];
+    }
+    if (val.charAt(17).toUpperCase() !== checks[sum % 11]) {
+        return prefix + '身份证号校验位不正确，请核对';
+    }
     return '';
 }
 
