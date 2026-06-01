@@ -80,6 +80,28 @@ function toggleSpouseField(show) {
     }
 }
 
+function updateRoomOptions() {
+    var hasSpouse = document.querySelector('input[name="bringingSpouse"]:checked').value === 'yes';
+    var childCount = parseInt(document.getElementById('childrenCount').value) || 0;
+    var alone = !hasSpouse && childCount === 0;
+    var sharedRadio = document.getElementById('roomShared');
+    var sharedPill = document.getElementById('sharedPill');
+    var roomHint = document.getElementById('roomHint');
+
+    if (alone) {
+        sharedRadio.disabled = false;
+        sharedPill.classList.remove('pill-disabled');
+        roomHint.style.display = 'none';
+    } else {
+        sharedRadio.disabled = true;
+        sharedPill.classList.add('pill-disabled');
+        roomHint.style.display = 'block';
+        if (sharedRadio.checked) {
+            document.getElementById('roomTwin').checked = true;
+        }
+    }
+}
+
 function updateChildrenAgeInputs() {
     var count = parseInt(document.getElementById('childrenCount').value) || 0;
     var container = document.getElementById('childrenAgesContainer');
@@ -111,6 +133,7 @@ async function submitFamilyInfo() {
         var val = input.value.trim();
         if (val !== '') childrenAges.push(val);
     });
+    var roomType = document.querySelector('input[name="roomType"]:checked').value;
     var dietaryRestrictions = document.getElementById('dietaryRestrictions').value.trim();
     var specialNeeds = document.getElementById('specialNeeds').value.trim();
     var idCard = document.getElementById('idCard').value.trim();
@@ -120,7 +143,11 @@ async function submitFamilyInfo() {
         return;
     }
 
-    if (idCard.length > 0 && idCard.length !== 18) {
+    if (!idCard) {
+        showError(errorEl, '请填写身份证号（用于购买保险）');
+        return;
+    }
+    if (idCard.length !== 18) {
         showError(errorEl, '身份证号应为18位');
         return;
     }
@@ -140,7 +167,8 @@ async function submitFamilyInfo() {
                 children_ages: childrenAges.join(','),
                 dietary_restrictions: dietaryRestrictions,
                 special_needs: specialNeeds,
-                id_card: idCard
+                id_card: idCard,
+                room_type: roomType
             });
 
         if (result.error) {
@@ -231,9 +259,13 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('input[name="bringingSpouse"]').forEach(function(radio) {
         radio.addEventListener('change', function() {
             toggleSpouseField(this.value === 'yes');
+            updateRoomOptions();
         });
     });
 
-    document.getElementById('childrenCount').addEventListener('input', updateChildrenAgeInputs);
+    document.getElementById('childrenCount').addEventListener('input', function() {
+        updateChildrenAgeInputs();
+        updateRoomOptions();
+    });
     document.getElementById('submitBtn').addEventListener('click', submitFamilyInfo);
 });

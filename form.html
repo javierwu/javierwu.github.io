@@ -94,6 +94,30 @@
                 <!-- 子女年龄（动态） -->
                 <div id="childrenAgesContainer" class="children-ages-container"></div>
 
+                <!-- 房间类型 -->
+                <div class="form-group">
+                    <label class="form-label">房间类型</label>
+                    <div class="radio-group">
+                        <div class="radio-pill">
+                            <input type="radio" name="roomType" id="roomTwin" value="twin" checked>
+                            <label for="roomTwin">双床房</label>
+                        </div>
+                        <div class="radio-pill">
+                            <input type="radio" name="roomType" id="roomKing" value="king">
+                            <label for="roomKing">大床房</label>
+                        </div>
+                        <div class="radio-pill">
+                            <input type="radio" name="roomType" id="roomFamily" value="family">
+                            <label for="roomFamily">家庭房</label>
+                        </div>
+                        <div class="radio-pill" id="sharedPill">
+                            <input type="radio" name="roomType" id="roomShared" value="shared">
+                            <label for="roomShared">拼房</label>
+                        </div>
+                    </div>
+                    <p id="roomHint" style="font-size:13px; color:#aaa; margin-top:6px; display:none;">拼房仅限一人参加（不带家属）的同学选择</p>
+                </div>
+
                 <!-- 忌口 -->
                 <div class="form-group">
                     <label class="form-label">饮食禁忌（忌口）</label>
@@ -110,7 +134,7 @@
 
                 <!-- 身份证号 -->
                 <div class="form-group">
-                    <label class="form-label">身份证号（用于购买活动保险）</label>
+                    <label class="form-label">身份证号<span style="color:var(--terracotta-red);">（必填，用于购买活动保险）</span></label>
                     <input type="text" id="idCard" class="form-input"
                            placeholder="请输入18位身份证号码" maxlength="18">
                     <p style="font-size:13px; color:#aaa; margin-top:6px;">仅用于购买活动意外险，不会公开</p>

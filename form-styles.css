@@ -154,6 +154,16 @@
     border-color: var(--campus-green);
 }
 
+.radio-pill.pill-disabled label {
+    opacity: 0.35;
+    cursor: not-allowed;
+    border-color: var(--water-light);
+}
+
+.radio-pill.pill-disabled label:hover {
+    border-color: var(--water-light);
+}
+
 /* 文本域 */
 .form-textarea {
     width: 100%;
