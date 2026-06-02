@@ -1,0 +1,261 @@
+/* 活动行程页 */
+
+.itinerary-hero {
+    background: linear-gradient(160deg, var(--campus-green) 0%, #5a8a6a 50%, var(--water-blue) 100%);
+    padding: 100px 30px 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-dates {
+    font-size: 20px;
+    color: rgba(255,255,255,0.7);
+    letter-spacing: 6px;
+    font-weight: 300;
+    margin-bottom: 10px;
+}
+
+.itinerary-hero h1 {
+    font-size: 48px;
+    color: var(--pure-white);
+    font-weight: 700;
+    letter-spacing: 4px;
+    margin-bottom: 12px;
+}
+
+.hero-sub {
+    font-size: 18px;
+    color: rgba(255,255,255,0.85);
+    letter-spacing: 2px;
+}
+
+.hero-divider {
+    width: 60px;
+    height: 3px;
+    background: var(--nostalgic-gold);
+    margin: 30px auto 0;
+    border-radius: 2px;
+}
+
+/* Day section */
+.day-section {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 60px 20px 40px;
+}
+
+.day-header {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 50px;
+}
+
+.day-number {
+    font-size: 64px;
+    font-weight: 800;
+    line-height: 1;
+    opacity: 0.1;
+    color: var(--campus-green);
+    min-width: 100px;
+}
+
+.day1-section .day-number { color: var(--campus-green); }
+.day2-section .day-number { color: var(--water-blue); }
+
+.day-info h2 {
+    font-size: 24px;
+    color: var(--dark-gray);
+    font-weight: 700;
+}
+
+.day-info p {
+    font-size: 15px;
+    color: #888;
+    margin-top: 4px;
+}
+
+/* Timeline */
+.timeline {
+    position: relative;
+    padding-left: 80px;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 22px;
+    top: 8px;
+    bottom: 8px;
+    width: 2px;
+    background: linear-gradient(180deg, var(--water-light), var(--campus-green), var(--water-light));
+    border-radius: 1px;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 32px;
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 0;
+}
+
+.timeline-time {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--campus-green-dark);
+    text-align: right;
+    padding-right: 20px;
+    padding-top: 18px;
+}
+
+.timeline-dot {
+    position: absolute;
+    left: -62px;
+    top: 20px;
+    width: 14px;
+    height: 14px;
+    background: var(--pure-white);
+    border: 3px solid var(--campus-green);
+    border-radius: 50%;
+    z-index: 1;
+    box-shadow: 0 0 0 4px rgba(135, 169, 107, 0.15);
+}
+
+.timeline-dot.dot-accent {
+    border-color: var(--terracotta-red);
+    box-shadow: 0 0 0 4px rgba(224, 122, 95, 0.15);
+    width: 18px;
+    height: 18px;
+    left: -64px;
+    top: 18px;
+}
+
+.timeline-card {
+    background: var(--pure-white);
+    border-radius: 16px;
+    padding: 20px 24px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+    border: 1px solid rgba(0,0,0,0.04);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.timeline-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(135, 169, 107, 0.12);
+}
+
+.timeline-card.card-accent {
+    background: linear-gradient(135deg, var(--campus-green), var(--campus-green-dark));
+    color: var(--pure-white);
+    border: none;
+}
+
+.timeline-card.card-accent h3,
+.timeline-card.card-accent p,
+.timeline-card.card-accent .timeline-loc {
+    color: var(--pure-white);
+}
+
+.timeline-card.card-accent .timeline-loc {
+    opacity: 0.8;
+}
+
+.timeline-icon {
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+
+.timeline-card h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--dark-gray);
+    margin-bottom: 4px;
+}
+
+.timeline-loc {
+    font-size: 13px;
+    color: var(--campus-green);
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.timeline-card p:last-child {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.6;
+}
+
+/* Timeline end item */
+.timeline-end {
+    margin-bottom: 0;
+}
+
+/* Day transition */
+.day-transition {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 30px 40px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.transition-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--light-gray), transparent);
+}
+
+.transition-text {
+    font-size: 14px;
+    color: #aaa;
+    white-space: nowrap;
+    letter-spacing: 2px;
+}
+
+/* Footer note */
+.itinerary-footer {
+    text-align: center;
+    padding: 40px 20px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.itinerary-footer p {
+    font-size: 14px;
+    color: #888;
+    margin-bottom: 8px;
+}
+
+.itinerary-footer .footer-tagline {
+    font-size: 16px;
+    color: var(--nostalgic-gold);
+    font-weight: 600;
+    letter-spacing: 4px;
+    margin-top: 16px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .itinerary-hero h1 { font-size: 32px; }
+    .hero-dates { font-size: 16px; letter-spacing: 4px; }
+
+    .day-number { font-size: 48px; min-width: 70px; }
+    .day-info h2 { font-size: 20px; }
+    .day-header { gap: 16px; }
+
+    .timeline { padding-left: 60px; }
+    .timeline-time { font-size: 13px; }
+    .timeline-dot { left: -52px; }
+    .timeline-dot.dot-accent { left: -54px; }
+
+    .timeline-card { padding: 16px 18px; }
+}
+
+/* Nav active */
+.nav-menu a.active {
+    background: rgba(255, 255, 255, 0.3) !important;
+}
