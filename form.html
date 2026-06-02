@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>家属信息填报 - 浙工大给排水2006届 毕业20周年同学会</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="form-styles.css">
+    <link rel="stylesheet" href="form-styles.css?v=3">
 </head>
 <body>
     <!-- 导航栏 -->
@@ -99,6 +99,10 @@
                             <input type="radio" name="roomType" id="roomShared" value="shared">
                             <label for="roomShared">拼房</label>
                         </div>
+                        <div class="radio-pill">
+                            <input type="radio" name="roomType" id="roomNone" value="none">
+                            <label for="roomNone">无需房间</label>
+                        </div>
                     </div>
                     <p id="roomHint" class="field-hint" style="display:none;">拼房仅限不带随行家属的同学选择</p>
                 </div>
@@ -176,6 +180,6 @@
     </footer>
 
     <!-- Supabase SDK + 表单逻辑 -->
-    <script type="module" src="form.js"></script>
+    <script type="module" src="form.js?v=3"></script>
 </body>
 </html>

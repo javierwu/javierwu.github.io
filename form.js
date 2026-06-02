@@ -250,7 +250,7 @@ function showSuccess(info) {
 
     document.getElementById('summaryName').textContent = info.name;
 
-    var roomMap = { twin: '双床房', king: '大床房', family: '家庭房', shared: '拼房' };
+    var roomMap = { twin: '双床房', king: '大床房', family: '家庭房', shared: '拼房', none: '无需房间' };
     document.getElementById('summaryRoom').textContent = roomMap[info.roomType] || info.roomType;
 
     var membersHtml = '';
