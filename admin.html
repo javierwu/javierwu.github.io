@@ -135,7 +135,9 @@
 
             try {
                 const { createClient } = await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm');
-                const client = createClient(SUPABASE_URL, input);
+                const client = createClient(SUPABASE_URL, input, {
+                    auth: { autoRefreshToken: false, persistSession: false }
+                });
 
                 // 用 key 查询数据库来验证有效性
                 const test = await client.from('students').select('student_id').limit(1);
@@ -412,7 +414,9 @@
             if (savedKey) {
                 try {
                     const { createClient } = await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm');
-                    const client = createClient(SUPABASE_URL, savedKey);
+                    const client = createClient(SUPABASE_URL, savedKey, {
+                        auth: { autoRefreshToken: false, persistSession: false }
+                    });
                     const test = await client.from('students').select('student_id').limit(1);
                     if (!test.error) {
                         supabaseClient = client;
