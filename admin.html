@@ -177,7 +177,7 @@
             try {
                 const [studentsRes, familyRes] = await Promise.all([
                     supabaseClient.from('students').select('*').order('student_id'),
-                    supabaseClient.from('family_info').select('*').order('created_at', { ascending: false })
+                    supabaseClient.from('family_info').select('*').order('submitted_at', { ascending: false })
                 ]);
 
                 if (studentsRes.error) throw studentsRes.error;
@@ -261,7 +261,7 @@
                 const room = isSubmitted ? mapRoom(info.room_type) : '-';
                 const dietary = isSubmitted ? (info.dietary_restrictions || '无') : '-';
                 const special = isSubmitted ? (info.special_needs || '无') : '-';
-                const time = isSubmitted ? formatTime(info.created_at) : '-';
+                const time = isSubmitted ? formatTime(info.submitted_at) : '-';
 
                 html += `
                     <tr class="${isSubmitted ? 'row-submitted' : 'row-pending'}" onclick="toggleDetail(${s.student_id})">
@@ -344,7 +344,7 @@
                         </div>
                         <div class="detail-block">
                             <span class="detail-label">提交时间</span>
-                            <span class="detail-value">${formatTime(info.created_at)}</span>
+                            <span class="detail-value">${formatTime(info.submitted_at)}</span>
                         </div>
                     </div>
                     <div class="detail-members-title">随行家属（${info.members ? info.members.length : 0}人）</div>
@@ -373,7 +373,7 @@
                 const room = isSubmitted ? mapRoom(info.room_type) : '';
                 const dietary = isSubmitted ? (info.dietary_restrictions || '') : '';
                 const special = isSubmitted ? (info.special_needs || '') : '';
-                const time = isSubmitted ? formatTime(info.created_at) : '';
+                const time = isSubmitted ? formatTime(info.submitted_at) : '';
 
                 csv += `${s.student_id},${s.name},${s.dept === 1 ? '1系' : '2系'},${isSubmitted ? '是' : '否'},${memberCount},${room},${dietary},${special},${time}\n`;
             });
