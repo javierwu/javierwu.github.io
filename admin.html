@@ -137,10 +137,10 @@
                 const { createClient } = await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm');
                 const client = createClient(SUPABASE_URL, input);
 
-                // 用 service role key 查询来验证有效性
-                const test = await client.from('students').select('student_id', { count: 'exact', head: true });
+                // 用 key 查询数据库来验证有效性
+                const test = await client.from('students').select('student_id').limit(1);
 
-                if (test.error) {
+                if (test.error || !test.data) {
                     errorEl.textContent = 'Key 无效或无权限，请检查后重试';
                     errorEl.style.display = 'block';
                     btn.disabled = false;
@@ -413,7 +413,7 @@
                 try {
                     const { createClient } = await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm');
                     const client = createClient(SUPABASE_URL, savedKey);
-                    const test = await client.from('students').select('student_id', { count: 'exact', head: true });
+                    const test = await client.from('students').select('student_id').limit(1);
                     if (!test.error) {
                         supabaseClient = client;
                         document.getElementById('authSection').style.display = 'none';
