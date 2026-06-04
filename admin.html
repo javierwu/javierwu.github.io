@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>报名信息管理 - 浙工大给排水2006届</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="admin-styles.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-number">20</span>
+                <span class="logo-years">06-26</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="signup.html">报名状态</a></li>
+                <li><a href="form.html">家属信息</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 验证界面 -->
+    <section class="auth-section" id="authSection">
+        <div class="auth-card">
+            <div class="auth-icon">🔐</div>
+            <h2>管理员验证</h2>
+            <p>请输入 Supabase Service Role Key 以查看报名信息</p>
+            <div class="auth-form">
+                <input type="password" id="privateKeyInput" placeholder="service_role key"
+                       autocomplete="off">
+                <button id="authBtn" onclick="authenticate()">验证</button>
+            </div>
+            <p class="auth-error" id="authError"></p>
+        </div>
+    </section>
+
+    <!-- 数据界面 -->
+    <section class="admin-section" id="adminSection" style="display:none;">
+        <div class="container">
+            <div class="admin-header">
+                <h1>报名信息总览</h1>
+                <div class="admin-stats" id="adminStats"></div>
+                <div class="admin-actions">
+                    <button class="admin-btn" onclick="exportCSV()">导出 CSV</button>
+                    <button class="admin-btn admin-btn-outline" onclick="logout()">退出</button>
+                </div>
+            </div>
+
+            <!-- 统计概览 -->
+            <div class="overview-cards" id="overviewCards"></div>
+
+            <!-- 搜索和筛选 -->
+            <div class="filter-bar">
+                <input type="text" id="searchInput" placeholder="搜索姓名或学号..."
+                       oninput="filterTable()">
+                <select id="statusFilter" onchange="filterTable()">
+                    <option value="all">全部状态</option>
+                    <option value="submitted">已提交家属信息</option>
+                    <option value="not_submitted">未提交家属信息</option>
+                </select>
+                <select id="deptFilter" onchange="filterTable()">
+                    <option value="all">全部班级</option>
+                    <option value="1">1系</option>
+                    <option value="2">2系</option>
+                </select>
+            </div>
+
+            <!-- 数据表格 -->
+            <div class="table-wrapper">
+                <table class="data-table" id="dataTable">
+                    <thead>
+                        <tr>
+                            <th>学号</th>
+                            <th>姓名</th>
+                            <th>班级</th>
+                            <th>报名状态</th>
+                            <th>随行人数</th>
+                            <th>房型</th>
+                            <th>饮食要求</th>
+                            <th>特殊需求</th>
+                            <th>提交时间</th>
+                        </tr>
+                    </thead>
+                    <tbody id="dataBody"></tbody>
+                </table>
+            </div>
+
+            <!-- 家属详情展开区 -->
+            <div id="detailPanel" class="detail-panel" style="display:none;"></div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-logo">
+                <span class="logo-number">20</span>
+                <span class="logo-years">06-26</span>
+            </div>
+            <p class="footer-text">浙工大给排水2006届 毕业20周年同学会</p>
+            <p class="footer-tagline">廿载同窗 · 水长流远</p>
+        </div>
+    </footer>
+
+    <script>
+        const SUPABASE_URL = 'https://wdkjwfvgfuhyczdspbii.supabase.co';
+
+        let allStudents = [];
+        let allFamilyInfo = [];
+        let supabaseClient = null;
+
+        const ROOM_MAP = { twin: '双床房', king: '大床房', family: '家庭房', shared: '拼房', none: '无需房间' };
+        const MEMBER_TYPE_MAP = { spouse: '配偶', child: '子女' };
+
+        function mapRoom(val) { return ROOM_MAP[val] || val || '未选择'; }
+        function mapMemberType(val) { return MEMBER_TYPE_MAP[val] || val; }
+
+        async function authenticate() {
+            const input = document.getElementById('privateKeyInput').value.trim();
+            const errorEl = document.getElementById('authError');
+            const btn = document.getElementById('authBtn');
+
+            if (!input) {
+                errorEl.textContent = '请输入 Service Role Key';
+                errorEl.style.display = 'block';
+                return;
+            }
+
+            btn.disabled = true;
+            btn.textContent = '验证中...';
+            errorEl.style.display = 'none';
+
+            try {
+                const { createClient } = await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm');
+                const client = createClient(SUPABASE_URL, input);
+
+                // 用 service role key 查询来验证有效性
+                const test = await client.from('students').select('student_id', { count: 'exact', head: true });
+
+                if (test.error) {
+                    errorEl.textContent = 'Key 无效或无权限，请检查后重试';
+                    errorEl.style.display = 'block';
+                    btn.disabled = false;
+                    btn.textContent = '验证';
+                    return;
+                }
+
+                supabaseClient = client;
+                sessionStorage.setItem('admin_key', input);
+                document.getElementById('authSection').style.display = 'none';
+                document.getElementById('adminSection').style.display = 'block';
+                loadData();
+            } catch (err) {
+                errorEl.textContent = '验证失败：' + (err.message || '未知错误');
+                errorEl.style.display = 'block';
+                btn.disabled = false;
+                btn.textContent = '验证';
+            }
+        }
+
+        function logout() {
+            supabaseClient = null;
+            sessionStorage.removeItem('admin_key');
+            document.getElementById('adminSection').style.display = 'none';
+            document.getElementById('authSection').style.display = 'flex';
+            document.getElementById('privateKeyInput').value = '';
+            document.getElementById('authBtn').disabled = false;
+            document.getElementById('authBtn').textContent = '验证';
+        }
+
+        async function loadData() {
+            try {
+                const [studentsRes, familyRes] = await Promise.all([
+                    supabaseClient.from('students').select('*').order('student_id'),
+                    supabaseClient.from('family_info').select('*').order('created_at', { ascending: false })
+                ]);
+
+                if (studentsRes.error) throw studentsRes.error;
+                if (familyRes.error) throw familyRes.error;
+
+                allStudents = studentsRes.data;
+                allFamilyInfo = familyRes.data;
+
+                renderOverview();
+                renderTable();
+            } catch (err) {
+                console.error('加载数据失败:', err);
+            }
+        }
+
+        function renderOverview() {
+            const total = allStudents.length;
+            const submitted = new Set(allFamilyInfo.map(f => f.student_id));
+            const submittedCount = submitted.size;
+            const totalFamilyMembers = allFamilyInfo.reduce((sum, f) => {
+                return sum + (f.members ? f.members.length : 0);
+            }, 0);
+
+            const dept1Count = allStudents.filter(s => s.dept === 1).length;
+            const dept2Count = allStudents.filter(s => s.dept === 2).length;
+
+            const cards = document.getElementById('overviewCards');
+            cards.innerHTML = `
+                <div class="ov-card ov-total">
+                    <span class="ov-num">${total}</span>
+                    <span class="ov-label">同学总数</span>
+                </div>
+                <div class="ov-card ov-submitted">
+                    <span class="ov-num">${submittedCount}</span>
+                    <span class="ov-label">已提交信息</span>
+                </div>
+                <div class="ov-card ov-pending">
+                    <span class="ov-num">${total - submittedCount}</span>
+                    <span class="ov-label">未提交</span>
+                </div>
+                <div class="ov-card ov-family">
+                    <span class="ov-num">${totalFamilyMembers}</span>
+                    <span class="ov-label">随行家属</span>
+                </div>
+                <div class="ov-card ov-dept1">
+                    <span class="ov-num">${dept1Count}</span>
+                    <span class="ov-label">1系</span>
+                </div>
+                <div class="ov-card ov-dept2">
+                    <span class="ov-num">${dept2Count}</span>
+                    <span class="ov-label">2系</span>
+                </div>
+            `;
+        }
+
+        function renderTable() {
+            const searchVal = document.getElementById('searchInput').value.trim().toLowerCase();
+            const statusFilter = document.getElementById('statusFilter').value;
+            const deptFilter = document.getElementById('deptFilter').value;
+
+            const submittedIds = new Set(allFamilyInfo.map(f => f.student_id));
+            const familyMap = {};
+            allFamilyInfo.forEach(f => { familyMap[f.student_id] = f; });
+
+            const tbody = document.getElementById('dataBody');
+            let html = '';
+
+            const filtered = allStudents.filter(s => {
+                if (searchVal && !s.name.toLowerCase().includes(searchVal) && !String(s.student_id).includes(searchVal)) return false;
+                if (statusFilter === 'submitted' && !submittedIds.has(s.student_id)) return false;
+                if (statusFilter === 'not_submitted' && submittedIds.has(s.student_id)) return false;
+                if (deptFilter !== 'all' && s.dept !== parseInt(deptFilter)) return false;
+                return true;
+            });
+
+            filtered.forEach(s => {
+                const info = familyMap[s.student_id];
+                const isSubmitted = !!info;
+                const memberCount = info && info.members ? info.members.length : 0;
+
+                const room = isSubmitted ? mapRoom(info.room_type) : '-';
+                const dietary = isSubmitted ? (info.dietary_restrictions || '无') : '-';
+                const special = isSubmitted ? (info.special_needs || '无') : '-';
+                const time = isSubmitted ? formatTime(info.created_at) : '-';
+
+                html += `
+                    <tr class="${isSubmitted ? 'row-submitted' : 'row-pending'}" onclick="toggleDetail(${s.student_id})">
+                        <td>${s.student_id}</td>
+                        <td>${s.name}</td>
+                        <td>${s.dept === 1 ? '1系' : '2系'}</td>
+                        <td><span class="status-badge ${isSubmitted ? 'badge-yes' : 'badge-no'}">${isSubmitted ? '已提交' : '未提交'}</span></td>
+                        <td>${isSubmitted ? memberCount : '-'}</td>
+                        <td>${room}</td>
+                        <td>${truncate(dietary, 12)}</td>
+                        <td>${truncate(special, 12)}</td>
+                        <td class="time-cell">${time}</td>
+                    </tr>
+                `;
+            });
+
+            tbody.innerHTML = html || '<tr><td colspan="9" style="text-align:center;padding:40px;color:#999;">无匹配数据</td></tr>';
+        }
+
+        function toggleDetail(studentId) {
+            const panel = document.getElementById('detailPanel');
+            const familyMap = {};
+            allFamilyInfo.forEach(f => { familyMap[f.student_id] = f; });
+            const info = familyMap[studentId];
+            const student = allStudents.find(s => s.student_id === studentId);
+
+            if (panel.dataset.studentId == studentId && panel.style.display !== 'none') {
+                panel.style.display = 'none';
+                panel.dataset.studentId = '';
+                return;
+            }
+
+            panel.dataset.studentId = studentId;
+
+            if (!info) {
+                panel.innerHTML = `
+                    <div class="detail-header">
+                        <h3>${student.name}（${student.dept === 1 ? '1系' : '2系'}）- 学号 ${studentId}</h3>
+                    </div>
+                    <p class="detail-empty">该同学尚未提交家属信息</p>
+                `;
+            } else {
+                let membersHtml = '';
+                if (info.members && info.members.length > 0) {
+                    membersHtml = info.members.map((m, i) => {
+                        const typeLabel = mapMemberType(m.type);
+                        const ageInfo = m.type === 'child' && m.age ? `（${m.age}岁）` : '';
+                        return `<div class="detail-member">
+                            <span class="dm-index">${i + 1}</span>
+                            <span class="dm-name">${m.name}</span>
+                            <span class="dm-type">${typeLabel}${ageInfo}</span>
+                            <span class="dm-idcard">${maskIdCard(m.id_card)}</span>
+                        </div>`;
+                    }).join('');
+                } else {
+                    membersHtml = '<p style="color:#999;">无随行家属</p>';
+                }
+
+                panel.innerHTML = `
+                    <div class="detail-header">
+                        <h3>${student.name}（${student.dept === 1 ? '1系' : '2系'}）- 学号 ${studentId}</h3>
+                        <button class="detail-close" onclick="document.getElementById('detailPanel').style.display='none'">×</button>
+                    </div>
+                    <div class="detail-grid">
+                        <div class="detail-block">
+                            <span class="detail-label">本人身份证</span>
+                            <span class="detail-value">${maskIdCard(info.student_id_card)}</span>
+                        </div>
+                        <div class="detail-block">
+                            <span class="detail-label">房型选择</span>
+                            <span class="detail-value">${mapRoom(info.room_type)}</span>
+                        </div>
+                        <div class="detail-block">
+                            <span class="detail-label">饮食要求</span>
+                            <span class="detail-value">${info.dietary_restrictions || '无'}</span>
+                        </div>
+                        <div class="detail-block">
+                            <span class="detail-label">特殊需求</span>
+                            <span class="detail-value">${info.special_needs || '无'}</span>
+                        </div>
+                        <div class="detail-block">
+                            <span class="detail-label">提交时间</span>
+                            <span class="detail-value">${formatTime(info.created_at)}</span>
+                        </div>
+                    </div>
+                    <div class="detail-members-title">随行家属（${info.members ? info.members.length : 0}人）</div>
+                    <div class="detail-members">${membersHtml}</div>
+                `;
+            }
+
+            panel.style.display = 'block';
+            panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function filterTable() {
+            renderTable();
+        }
+
+        function exportCSV() {
+            const familyMap = {};
+            allFamilyInfo.forEach(f => { familyMap[f.student_id] = f; });
+
+            let csv = '﻿学号,姓名,班级,是否提交,随行人数,房型,饮食要求,特殊需求,提交时间\n';
+
+            allStudents.forEach(s => {
+                const info = familyMap[s.student_id];
+                const isSubmitted = !!info;
+                const memberCount = info && info.members ? info.members.length : 0;
+                const room = isSubmitted ? mapRoom(info.room_type) : '';
+                const dietary = isSubmitted ? (info.dietary_restrictions || '') : '';
+                const special = isSubmitted ? (info.special_needs || '') : '';
+                const time = isSubmitted ? formatTime(info.created_at) : '';
+
+                csv += `${s.student_id},${s.name},${s.dept === 1 ? '1系' : '2系'},${isSubmitted ? '是' : '否'},${memberCount},${room},${dietary},${special},${time}\n`;
+            });
+
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = `报名信息_${new Date().toISOString().slice(0, 10)}.csv`;
+            link.click();
+            URL.revokeObjectURL(link.href);
+        }
+
+        function formatTime(t) {
+            if (!t) return '-';
+            const d = new Date(t);
+            return d.toLocaleDateString('zh-CN') + ' ' + d.toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' });
+        }
+
+        function truncate(str, len) {
+            if (!str || str === '-') return '-';
+            return str.length > len ? str.slice(0, len) + '...' : str;
+        }
+
+        function maskIdCard(id) {
+            if (!id) return '-';
+            if (id.length < 10) return id;
+            return id.slice(0, 4) + '**********' + id.slice(-4);
+        }
+
+        // 回车验证
+        document.getElementById('privateKeyInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') authenticate();
+        });
+
+        // 恢复 session
+        (async function restoreSession() {
+            const savedKey = sessionStorage.getItem('admin_key');
+            if (savedKey) {
+                try {
+                    const { createClient } = await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm');
+                    const client = createClient(SUPABASE_URL, savedKey);
+                    const test = await client.from('students').select('student_id', { count: 'exact', head: true });
+                    if (!test.error) {
+                        supabaseClient = client;
+                        document.getElementById('authSection').style.display = 'none';
+                        document.getElementById('adminSection').style.display = 'block';
+                        loadData();
+                    } else {
+                        sessionStorage.removeItem('admin_key');
+                    }
+                } catch (e) {
+                    sessionStorage.removeItem('admin_key');
+                }
+            }
+        })();
+    </script>
+</body>
+</html>
