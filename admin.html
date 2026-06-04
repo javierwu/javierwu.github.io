@@ -30,7 +30,7 @@
             <h2>管理员验证</h2>
             <p>请输入 Supabase Service Role Key 以查看报名信息</p>
             <div class="auth-form">
-                <input type="password" id="privateKeyInput" placeholder="service_role key"
+                <input type="password" id="privateKeyInput" placeholder="service_role JWT (eyJ...)"
                        autocomplete="off">
                 <button id="authBtn" onclick="authenticate()">验证</button>
             </div>
@@ -136,7 +136,7 @@
             const btn = document.getElementById('authBtn');
 
             if (!input) {
-                errorEl.textContent = '请输入 Secret Key';
+                errorEl.textContent = '请输入 service_role key';
                 errorEl.style.display = 'block';
                 return;
             }
@@ -149,7 +149,7 @@
             try {
                 const data = await restGet('students', '?select=student_id&limit=1');
                 if (!data || data.length === 0) {
-                    throw new Error('无数据返回');
+                    throw new Error('无法读取数据');
                 }
                 sessionStorage.setItem('admin_key', input);
                 document.getElementById('authSection').style.display = 'none';
